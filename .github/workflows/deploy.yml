@@ -6,41 +6,31 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Prepare Web Assets
         run: |
-          mkdir -p _site
-          cp -r app/src/main/assets/* _site/ || true
-          cp index.html _site/ 2>/dev/null || true
-          cp _site/index.html _site/404.html 2>/dev/null || true
+          mkdir -p build_site
+          if [ -d "app/src/main/assets" ]; then
+            cp -r app/src/main/assets/* build_site/ 2>/dev/null || true
+          fi
+          if [ -f "index.html" ]; then
+            cp index.html build_site/
+            cp index.html build_site/404.html
+          fi
 
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: '_site'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build_site
+          publish_branch: gh-pages
+          force_orphan: true
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
