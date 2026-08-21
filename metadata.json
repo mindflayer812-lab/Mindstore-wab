@@ -1,0 +1,7 @@
+{
+  "name": "Mind Store",
+  "description": "Advanced, modern & professional Android APK publishing and download platform with web responsive interface, version management, and secure admin portal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

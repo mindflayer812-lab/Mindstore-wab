@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mind Store - Official APK Publishing & Download Hub by Ajay</title>
+  <meta name="description" content="Official APK Marketplace by Ajay. Download Ajay Kishan AI and top Android utility tools with direct high-speed sideloading.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --surface-dark: #0f172a;
+      --card-dark: #162033;
+      --card-highlight: #1e2c44;
+      --border-dark: #26354f;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --cyan: #00e5ff;
+      --blue: #2563eb;
+      --indigo: #6366f1;
+      --purple: #8b5cf6;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #ef4444;
+
+      --brand-gradient: linear-gradient(135deg, #00e5ff, #2563eb, #7c3aed);
+      --card-gradient: linear-gradient(180deg, rgba(22, 32, 51, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      --emerald-gradient: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navbar */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-logo-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--brand-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.35);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-title .brand-accent { color: var(--cyan); }
+    
+    .brand-sub {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--emerald);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .brand-sub::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--emerald);
+    }
+
+    /* Desktop Search & Nav Items */
+    .desktop-search {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .desktop-search input {
+      width: 100%;
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 10px 16px 10px 42px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .desktop-search input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+    }
+
+    .desktop-search i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cyan);
+      font-size: 14px;
+    }
+
+    .header-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--card-highlight);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .nav-btn.mode-switcher {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.3);
+      color: var(--cyan);
+    }
+
+    .nav-btn.admin-pill {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+    }
+
+    /* Main Container */
+    .app-viewport {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Hero Section (Adaptive Split in Desktop, Clean Banner in Mobile) */
+    .hero-container {
+      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.18), transparent 60%),
+                  radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.15), transparent 50%),
+                  var(--card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 24px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 229, 255, 0.12);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .btn-action-primary {
+      background: var(--brand-gradient);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0, 229, 255, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-action-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-dark);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-action-outline:hover {
+      background: var(--card-highlight);
+      border-color: var(--cyan);
+    }
+
+    /* Hero Featured App Showcase Widget (Desktop Split Pane) */
+    .hero-showcase {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .showcase-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .showcase-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--emerald-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .showcase-info h4 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .showcase-info p {
+      font-size: 12px;
+      color: var(--emerald);
+      font-weight: 600;
+    }
+
+    /* Live Market Stats Ribbon */
+    .stats-ribbon {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 18px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stat-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .stat-num {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .stat-name {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Horizontal Category Scroll Bar */
+    .category-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+    }
+
+    .category-pills::-webkit-scrollbar { height: 4px; }
+    .category-pills::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
+
+    .cat-btn {
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      background: rgba(0, 229, 255, 0.12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Section Title */
+    .section-head {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Responsive App Cards Grid */
+    .apps-grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .market-card {
+      background: var(--card-gradient);
+      border: 1px solid var(--border-dark);
+      border-radius: 20px;
+      padding: 18px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .market-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-top {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .app-icon-art {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--brand-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 229, 255, 0.25);
+    }
+
+    .card-title-group h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .card-dev-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .card-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-tag {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .pill-tag.rating-tag {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-version-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .card-size-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-apk-dl {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-apk-dl:hover {
+      background: var(--indigo);
+      transform: scale(1.02);
+    }
+
+    /* Mobile Bottom Navigation Dock */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-dark);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      z-index: 999;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mob-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .mob-nav-item i {
+      font-size: 18px;
+    }
+
+    .mob-nav-item.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+    }
+
+    /* Modals & Dialogs (Responsive Sheet on Mobile, Centered on Desktop) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-content-box {
+      background: var(--surface-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 24px;
+      text-align: center;
+      animation: popAnim 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popAnim {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .download-meter-bg {
+      background: var(--card-highlight);
+      height: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0 10px;
+    }
+
+    .download-meter-fill {
+      background: var(--brand-gradient);
+      height: 100%;
+      width: 0%;
+      transition: width 0.15s;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--surface-dark);
+      border-top: 1px solid var(--border-dark);
+      padding: 36px 20px 80px;
+      margin-top: auto;
+    }
+
+    .footer-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .footer-col h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .footer-col p, .footer-col li {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--cyan);
+    }
+
+    .footer-bottom-line {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-dark);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      gap: 8px;
+    }
+
+    /* ========================================================
+       ADAPTIVE RESPONSIVENESS (MOBILE vs DESKTOP)
+       ======================================================== */
+
+    /* DESKTOP LAYOUT (Screen Width >= 769px) */
+    @media (min-width: 769px) {
+      .hero-container {
+        grid-template-columns: 1.4fr 1fr;
+        align-items: center;
+      }
+      .mobile-search-btn { display: none; }
+      .mobile-bottom-nav { display: none; }
+      .site-footer { padding-bottom: 36px; }
+    }
+
+    /* MOBILE PHONE LAYOUT (Screen Width <= 768px) */
+    @media (max-width: 768px) {
+      .header-container { padding: 10px 14px; }
+      .desktop-search { display: none; }
+      .header-nav-links .nav-btn:not(.mode-switcher) { display: none; }
+      
+      .hero-container {
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+
+      .hero-title { font-size: 24px; }
+      .hero-desc { font-size: 13px; }
+      .hero-showcase { display: none; }
+
+      .stats-ribbon {
+        grid-template-columns: 1fr;
+        padding: 12px 14px;
+        gap: 8px;
+      }
+
+      .stat-item {
+        justify-content: flex-start;
+      }
+
+      .apps-grid-view {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-bottom-nav {
+        display: flex;
+      }
+
+      /* Mobile Bottom Sheet Modal */
+      .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .modal-content-box {
+        border-radius: 24px 24px 0 0;
+        max-width: 100%;
+        animation: slideUpAnim 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-bottom: calc(24px + env(safe-area-inset-bottom));
+      }
+
+      @keyframes slideUpAnim {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+    }
+
+    /* FORCED DESKTOP / MOBILE MODES (Via Switcher) */
+    body.force-desktop .hero-container { grid-template-columns: 1.4fr 1fr !important; }
+    body.force-desktop .desktop-search { display: block !important; }
+    body.force-desktop .hero-showcase { display: flex !important; }
+    body.force-desktop .mobile-bottom-nav { display: none !important; }
+    body.force-desktop .apps-grid-view { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; }
+
+    body.force-mobile .hero-container { grid-template-columns: 1fr !important; }
+    body.force-mobile .desktop-search { display: none !important; }
+    body.force-mobile .hero-showcase { display: none !important; }
+    body.force-mobile .mobile-bottom-nav { display: flex !important; }
+    body.force-mobile .apps-grid-view { grid-template-columns: 1fr !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand" onclick="filterCategory('All')">
+        <div class="brand-logo-box">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <div>
+          <div class="brand-title"><span class="brand-accent">MIND</span> STORE</div>
+          <div class="brand-sub">OFFICIAL APK HUB</div>
+        </div>
+      </div>
+
+      <!-- Desktop Search Bar -->
+      <div class="desktop-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search apps, APKs, categories..." onkeyup="handleSearch()">
+      </div>
+
+      <!-- Action Buttons & Mode Switcher -->
+      <div class="header-nav-links">
+        <button class="nav-btn mode-switcher" id="modeToggleBtn" onclick="toggleDisplayMode()">
+          <i class="fa-solid fa-desktop"></i> <span id="modeText">Auto Mode</span>
+        </button>
+        <a href="#apps" class="nav-btn"><i class="fa-solid fa-grid-2"></i> Apps</a>
+        <button class="nav-btn admin-pill" onclick="openAdminPrompt()"><i class="fa-solid fa-lock"></i> Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Responsive Container -->
+  <main class="app-viewport">
+
+    <!-- Hero Section (Desktop Split / Mobile Streamlined) -->
+    <section class="hero-container">
+      <div>
+        <div class="hero-badge">
+          <i class="fa-solid fa-bolt"></i> FAST DIRECT APKS • CREATED BY AJAY
+        </div>
+        <h1 class="hero-title">Next-Gen Android Apps & Direct APK Hub</h1>
+        <p class="hero-desc">
+          Official publishing portal by <strong>Ajay</strong>. Download verified APK binaries for smart agriculture (<strong>Ajay Kishan AI</strong>), tools, and AI utilities with zero ads, high speeds, and signature verification.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-action-primary" onclick="triggerDownload('Ajay Kishan AI', 'v2.5.0', '22.4 MB')">
+            <i class="fa-solid fa-download"></i> Get Ajay Kishan AI (APK)
+          </button>
+          <button class="btn-action-outline" onclick="showGuideModal()">
+            <i class="fa-solid fa-book-open"></i> Install Guide
+          </button>
+        </div>
+      </div>
+
+      <!-- Desktop Featured App Widget -->
+      <div class="hero-showcase">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: var(--cyan); letter-spacing: 0.8px; margin-bottom: 8px;">
+            ★ FEATURED #1 FLAGSHIP RELEASE
+          </div>
+          <div class="showcase-header">
+            <div class="showcase-icon">
+              <i class="fa-solid fa-wheat-awn"></i>
+            </div>
+            <div class="showcase-info">
+              <h4>Ajay Kishan AI</h4>
+              <p>v2.5.0 • Official Release</p>
+            </div>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+            AI Crop Doctor, Live Mandi Bhav across 500+ APMC markets, 7-day weather alerts, and 24/7 Hindi Voice Kisan Assistant.
+          </p>
+        </div>
+        <button class="btn-apk-dl" style="width: 100%; justify-content: center; background: var(--emerald-gradient);" onclick="triggerDownload('Ajay Kishan AI', 'v2.5.0', '22.4 MB')">
+          <i class="fa-solid fa-download"></i> Direct Download (22.4 MB)
+        </button>
+      </div>
+    </section>
+
+    <!-- Market Live Stats -->
+    <section class="stats-ribbon">
+      <div class="stat-item">
+        <div class="stat-circle" style="background: rgba(0, 229, 255, 0.15); color: var(--cyan);">
+          <i class="fa-solid fa-cubes"></i>
+        </div>
+        <div>
+          <div class="stat-num">10+ Verified</div>
+          <div class="stat-name">Published Apps</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-circle" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald);">
+          <i class="fa-solid fa-download"></i>
+        </div>
+        <div>
+          <div class="stat-num">50,000+</div>
+          <div class="stat-name">Total Downloads</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-circle" style="background: rgba(245, 158, 11, 0.15); color: var(--amber);">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div>
+          <div class="stat-num">4.9 ★</div>
+          <div class="stat-name">User Rating</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Filters -->
+    <div class="category-pills" id="categoryPillRow">
+      <button class="cat-btn active" onclick="filterCategory('All')"><i class="fa-solid fa-globe"></i> All Apps</button>
+      <button class="cat-btn" onclick="filterCategory('Farming')"><i class="fa-solid fa-wheat-awn"></i> Farming</button>
+      <button class="cat-btn" onclick="filterCategory('AI Apps')"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Apps</button>
+      <button class="cat-btn" onclick="filterCategory('Tools')"><i class="fa-solid fa-screwdriver-wrench"></i> Tools</button>
+      <button class="cat-btn" onclick="filterCategory('Productivity')"><i class="fa-solid fa-chart-line"></i> Productivity</button>
+      <button class="cat-btn" onclick="filterCategory('Education')"><i class="fa-solid fa-graduation-cap"></i> Education</button>
+    </div>
+
+    <!-- Section Header -->
+    <div class="section-head" id="apps">
+      <span><i class="fa-solid fa-layer-group" style="color: var(--cyan);"></i> Available APK Downloads</span>
+      <span id="appCountText" style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Showing 6 Apps</span>
+    </div>
+
+    <!-- Apps Grid View -->
+    <div class="apps-grid-view" id="appsGrid">
+      <!-- Injected by JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Dock -->
+  <nav class="mobile-bottom-nav">
+    <a class="mob-nav-item active" onclick="filterCategory('All'); setActiveMobNav(this)">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a class="mob-nav-item" onclick="filterCategory('Farming'); setActiveMobNav(this)">
+      <i class="fa-solid fa-wheat-awn"></i>
+      <span>Farming</span>
+    </a>
+    <a class="mob-nav-item" onclick="filterCategory('AI Apps'); setActiveMobNav(this)">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span>AI Apps</span>
+    </a>
+    <a class="mob-nav-item" onclick="showGuideModal(); setActiveMobNav(this)">
+      <i class="fa-solid fa-circle-question"></i>
+      <span>Guide</span>
+    </a>
+    <a class="mob-nav-item" onclick="openAdminPrompt(); setActiveMobNav(this)">
+      <i class="fa-solid fa-shield"></i>
+      <span>Admin</span>
+    </a>
+  </nav>
+
+  <!-- Download Progress Dialog / Bottom Sheet -->
+  <div class="modal-backdrop" id="downloadModal">
+    <div class="modal-content-box">
+      <div id="modalDownloading">
+        <div style="width: 52px; height: 52px; border: 4px solid rgba(0, 229, 255, 0.15); border-top-color: var(--cyan); border-radius: 50%; margin: 0 auto 14px; animation: spin 0.9s linear infinite;"></div>
+        <h3 id="dlAppName" style="font-size: 18px; font-weight: 800; margin-bottom: 2px;">Downloading APK...</h3>
+        <p id="dlAppVersion" style="color: var(--cyan); font-size: 13px; font-weight: 600; margin-bottom: 12px;">Version 2.5.0</p>
+        
+        <div class="download-meter-bg">
+          <div class="download-meter-fill" id="dlProgressBar"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+          <span id="dlBytesText">0.0 MB / 22.4 MB</span>
+          <span id="dlPercentText" style="color: var(--cyan); font-weight: 800;">0%</span>
+        </div>
+
+        <p style="font-size: 11px; color: var(--text-muted);"><i class="fa-solid fa-shield"></i> Direct Verified Server • Checksum OK</p>
+      </div>
+
+      <div id="modalComplete" style="display: none;">
+        <div style="width: 56px; height: 56px; background: rgba(16, 185, 129, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: var(--emerald); font-size: 26px;">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--emerald); margin-bottom: 2px;">Download Complete!</h3>
+        <p id="dlFileName" style="font-size: 13px; color: #fff; margin-bottom: 14px;">Ajay_Kishan_AI_v2.5.0.apk</p>
+        
+        <div style="background: var(--card-highlight); padding: 12px; border-radius: 12px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-align: left;">
+          <strong>Installation:</strong> Tap the file in your device's notification bar or Downloads folder to install.
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-action-outline" style="flex: 1;" onclick="closeDownloadModal()">Done</button>
+          <button class="btn-action-primary" style="flex: 1; background: var(--emerald-gradient);" onclick="showGuideModal()">How to Install</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Installation Guide Dialog / Bottom Sheet -->
+  <div class="modal-backdrop" id="guideModal">
+    <div class="modal-content-box" style="text-align: left; max-width: 500px;">
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--cyan);"><i class="fa-solid fa-book-open"></i> APK Installation Steps</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px;">
+        <div style="display: flex; gap: 10px;">
+          <span style="width: 26px; height: 26px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">1</span>
+          <div>
+            <strong style="font-size: 13px;">Download the APK</strong>
+            <p style="font-size: 12px; color: var(--text-muted);">Tap "Download APK" to save the file to your device.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <span style="width: 26px; height: 26px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">2</span>
+          <div>
+            <strong style="font-size: 13px;">Enable Unknown Sources</strong>
+            <p style="font-size: 12px; color: var(--text-muted);">Go to Android Settings &gt; Security &gt; Allow "Install from unknown apps".</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <span style="width: 26px; height: 26px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">3</span>
+          <div>
+            <strong style="font-size: 13px;">Tap Install</strong>
+            <p style="font-size: 12px; color: var(--text-muted);">Open the file from your Notifications or Downloads folder and click Install.</p>
+          </div>
+        </div>
+      </div>
+      <button class="btn-action-primary" style="width: 100%; justify-content: center;" onclick="closeGuideModal()">Got it!</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <div class="footer-col">
+        <h4 style="color: var(--cyan);"><i class="fa-solid fa-brain"></i> Mind Store</h4>
+        <p>Direct Android APK distribution marketplace crafted by <strong>Ajay</strong>. Built for open, verified, and high-speed sideloading.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Publisher & Developer</h4>
+        <p><i class="fa-solid fa-user"></i> Developer: <strong>Ajay</strong></p>
+        <p><i class="fa-solid fa-phone"></i> Mobile: <strong>8595311812</strong></p>
+        <p><i class="fa-solid fa-envelope"></i> Email: <strong>mindflayer812@gmail.com</strong></p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <li><a href="#apps">All Applications</a></li>
+        <li><a href="#" onclick="showGuideModal()">Installation Guide</a></li>
+        <li><a href="#" onclick="openAdminPrompt()">Publisher Admin Portal</a></li>
+      </div>
+    </div>
+    <div class="footer-bottom-line">
+      <span>© 2026 Mind Store by Ajay. All rights reserved.</span>
+      <span>100% Safe APK Downloads</span>
+    </div>
+  </footer>
+
+  <script>
+    // App Database
+    const apps = [
+      {
+        id: "ajay_kishan_ai",
+        name: "Ajay Kishan AI",
+        category: "Farming",
+        developer: "Ajay",
+        rating: "5.0",
+        downloads: "52.0K",
+        version: "v2.5.0",
+        size: "22.4 MB",
+        icon: "fa-wheat-awn",
+        isFeatured: true,
+        desc: "Official smart agriculture AI app created by Ajay. Instant camera-based crop disease diagnosis, daily APMC Mandi live rates, 7-day weather rain alerts, and 24/7 Hindi voice kisan assistant."
+      },
+      {
+        id: "kisan_mitra_ai",
+        name: "Kisan Mitra AI",
+        category: "Farming",
+        developer: "Ajay",
+        rating: "4.9",
+        downloads: "18.5K",
+        version: "v2.1.0",
+        size: "24.5 MB",
+        icon: "fa-seedling",
+        desc: "AI crop doctor, mandi rate analytics, fertilizer recommendations, and smart farmer advisory."
+      },
+      {
+        id: "smart_agro_farm",
+        name: "Smart Agro Farm Tracker",
+        category: "Farming",
+        developer: "Ajay",
+        rating: "4.8",
+        downloads: "12.3K",
+        version: "v1.4.2",
+        size: "18.2 MB",
+        icon: "fa-tractor",
+        desc: "Farm yield calculator, automated fertilizer dosage planner, harvest ledger, and offline records."
+      },
+      {
+        id: "mind_ai_assistant",
+        name: "Mind AI Assistant",
+        category: "AI Apps",
+        developer: "Ajay",
+        rating: "4.9",
+        downloads: "28.1K",
+        version: "v3.0.1",
+        size: "32.0 MB",
+        icon: "fa-robot",
+        desc: "Multimodal intelligent assistant with voice, image analysis, and fast code drafting."
+      },
+      {
+        id: "agro_mandi_live",
+        name: "Agro Mandi Live Rates",
+        category: "Tools",
+        developer: "Ajay",
+        rating: "4.7",
+        downloads: "9.4K",
+        version: "v1.2.0",
+        size: "14.8 MB",
+        icon: "fa-chart-simple",
+        desc: "Live daily mandi rates across all Indian states with price trends and volume tracking."
+      },
+      {
+        id: "mind_speed_booster",
+        name: "Mind Speed Booster",
+        category: "Tools",
+        developer: "Ajay",
+        rating: "4.8",
+        downloads: "15.7K",
+        version: "v2.0.0",
+        size: "8.5 MB",
+        icon: "fa-bolt",
+        desc: "Ultra lightweight Android memory optimizer, APK extractor, and cache cleaner."
+      }
+    ];
+
+    let currentCategory = 'All';
+    let currentMode = 'auto'; // 'auto', 'mobile', 'desktop'
+
+    function renderApps(list) {
+      const container = document.getElementById('appsGrid');
+      const countText = document.getElementById('appCountText');
+      countText.innerText = `Showing ${list.length} Apps`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: var(--text-muted);">
+            <i class="fa-solid fa-folder-open" style="font-size: 36px; margin-bottom: 10px; color: var(--border-dark);"></i>
+            <h3>No apps found</h3>
+            <p>Try searching for a different keyword or category.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(app => `
+        <div class="market-card" onclick="triggerDownload('${app.name}', '${app.version}', '${app.size}')">
+          <div class="card-top">
+            <div class="app-icon-art">
+              <i class="fa-solid ${app.icon}"></i>
+            </div>
+            <div class="card-title-group">
+              <h3>${app.name}</h3>
+              <div class="card-dev-badge">
+                By ${app.developer} <i class="fa-solid fa-circle-check" style="color: var(--emerald);"></i>
+              </div>
+              <div class="card-tag-row">
+                <span class="pill-tag">${app.category}</span>
+                <span class="pill-tag rating-tag"><i class="fa-solid fa-star"></i> ${app.rating}</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">${app.desc}</p>
+          <div class="card-bottom-bar">
+            <div>
+              <span class="card-version-label">${app.version}</span>
+              <span class="card-size-label">• ${app.size}</span>
+            </div>
+            <button class="btn-apk-dl" onclick="event.stopPropagation(); triggerDownload('${app.name}', '${app.version}', '${app.size}')">
+              <i class="fa-solid fa-download"></i> APK
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      const buttons = document.querySelectorAll('.cat-btn');
+      buttons.forEach(b => {
+        if (b.innerText.includes(cat) || (cat === 'All' && b.innerText.includes('All'))) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
+      if (cat === 'All') {
+        renderApps(apps);
+      } else {
+        const filtered = apps.filter(a => a.category === cat);
+        renderApps(filtered);
+      }
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = apps.filter(a => 
+        a.name.toLowerCase().includes(q) || 
+        a.category.toLowerCase().includes(q) ||
+        a.desc.toLowerCase().includes(q)
+      );
+      renderApps(filtered);
+    }
+
+    function setActiveMobNav(element) {
+      document.querySelectorAll('.mob-nav-item').forEach(i => i.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Toggle Display Mode between Auto, Mobile, Desktop
+    function toggleDisplayMode() {
+      const body = document.body;
+      const btnText = document.getElementById('modeText');
+      const icon = document.querySelector('#modeToggleBtn i');
+
+      if (currentMode === 'auto') {
+        currentMode = 'mobile';
+        body.classList.remove('force-desktop');
+        body.classList.add('force-mobile');
+        btnText.innerText = 'Mobile Mode';
+        icon.className = 'fa-solid fa-mobile-screen';
+      } else if (currentMode === 'mobile') {
+        currentMode = 'desktop';
+        body.classList.remove('force-mobile');
+        body.classList.add('force-desktop');
+        btnText.innerText = 'Desktop Mode';
+        icon.className = 'fa-solid fa-desktop';
+      } else {
+        currentMode = 'auto';
+        body.classList.remove('force-mobile', 'force-desktop');
+        btnText.innerText = 'Auto Mode';
+        icon.className = 'fa-solid fa-wand-magic-sparkles';
+      }
+    }
+
+    // Download Simulation
+    let downloadTimer = null;
+    function triggerDownload(name, version, size) {
+      const modal = document.getElementById('downloadModal');
+      const dlName = document.getElementById('dlAppName');
+      const dlVer = document.getElementById('dlAppVersion');
+      const dlBytes = document.getElementById('dlBytesText');
+      const dlPct = document.getElementById('dlPercentText');
+      const dlBar = document.getElementById('dlProgressBar');
+      const downloadingView = document.getElementById('modalDownloading');
+      const completeView = document.getElementById('modalComplete');
+      const completedFileName = document.getElementById('dlFileName');
+
+      dlName.innerText = `Downloading ${name}...`;
+      dlVer.innerText = `${version} (${size})`;
+      downloadingView.style.display = 'block';
+      completeView.style.display = 'none';
+      dlBar.style.width = '0%';
+      dlPct.innerText = '0%';
+      modal.style.display = 'flex';
+
+      let progress = 0;
+      const totalMb = parseFloat(size);
+      
+      clearInterval(downloadTimer);
+      downloadTimer = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 10;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(downloadTimer);
+          setTimeout(() => {
+            downloadingView.style.display = 'none';
+            completedFileName.innerText = `${name.replace(/\s+/g, '_')}_${version}.apk`;
+            completeView.style.display = 'block';
+          }, 300);
+        }
+
+        dlBar.style.width = `${progress}%`;
+        dlPct.innerText = `${progress}%`;
+        const currentMb = ((progress / 100) * totalMb).toFixed(1);
+        dlBytes.innerText = `${currentMb} MB / ${size}`;
+      }, 120);
+    }
+
+    function closeDownloadModal() {
+      document.getElementById('downloadModal').style.display = 'none';
+      clearInterval(downloadTimer);
+    }
+
+    function showGuideModal() {
+      document.getElementById('guideModal').style.display = 'flex';
+    }
+
+    function closeGuideModal() {
+      document.getElementById('guideModal').style.display = 'none';
+    }
+
+    function openAdminPrompt() {
+      const pin = prompt("Enter Master Admin PIN (Default: 8595311812 or admin123):");
+      if (pin === "8595311812" || pin === "admin123") {
+        alert("✅ Welcome Ajay! Master Admin Access Granted.\nYou can upload APKs, manage releases, and edit store settings.");
+      } else if (pin) {
+        alert("❌ Invalid PIN. Access Denied.");
+      }
+    }
+
+    // Initial render
+    renderApps(apps);
+  </script>
+</body>
+</html>
