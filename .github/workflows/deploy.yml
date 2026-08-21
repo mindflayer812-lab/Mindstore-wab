@@ -1,8 +1,9 @@
-name: Deploy Mind Store to GitHub Pages
+name: Deploy Mind Store
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,26 +12,32 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Prepare Web Assets
+      - name: Prepare Website
         run: |
+          rm -rf build_site
           mkdir -p build_site
-          if [ -d "app/src/main/assets" ]; then
-            cp -r app/src/main/assets/* build_site/ 2>/dev/null || true
-          fi
-          if [ -f "index.html" ]; then
-            cp index.html build_site/
-            cp index.html build_site/404.html
-          fi
 
-      - name: Deploy to gh-pages branch
+          # Root website files
+          cp -r index.html build_site/
+
+          # अगर ये folders मौजूद हैं तो उन्हें भी website में शामिल करें
+          for dir in css js images assets; do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" build_site/
+            fi
+          done
+
+          # 404 page
+          cp index.html build_site/404.html
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build_site
           publish_branch: gh-pages
-          force_orphan: true
-
