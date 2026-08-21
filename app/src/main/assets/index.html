@@ -2,38 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mind Store - Official APK Publishing & Direct Download Hub by Ajay</title>
-  <meta name="description" content="Official APK Marketplace by Ajay. Upload APK/ZIP files directly and get instant verified downloads for Ajay Kishan AI and utilities.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mind Store — Official APK Publishing & Download Hub</title>
+  <meta name="description" content="Next-Generation APK Marketplace by Ajay. Direct, verified Android APK publishing, automated version archiving, and ultra-fast downloads.">
   
-  <!-- Fonts & Icons -->
+  <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     :root {
-      --bg-dark: #090d16;
-      --surface-dark: #0f172a;
-      --card-dark: #162033;
-      --card-highlight: #1e2c44;
-      --border-dark: #26354f;
-      --border-light: rgba(255, 255, 255, 0.1);
+      --bg-body: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #162033;
+      --bg-card-hover: #1e2c44;
+      --border-color: #26354f;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      
+      --text-subtle: #64748b;
+
       --cyan: #00e5ff;
       --blue: #2563eb;
       --indigo: #6366f1;
-      --purple: #8b5cf6;
       --emerald: #10b981;
       --amber: #f59e0b;
       --rose: #ef4444;
+      --purple: #8b5cf6;
 
-      --brand-gradient: linear-gradient(135deg, #00e5ff, #2563eb, #7c3aed);
-      --card-gradient: linear-gradient(180deg, rgba(22, 32, 51, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-      --emerald-gradient: linear-gradient(135deg, #059669, #10b981);
+      --gradient-brand: linear-gradient(135deg, #00e5ff 0%, #2563eb 50%, #7c3aed 100%);
+      --gradient-emerald: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      --gradient-card: linear-gradient(180deg, rgba(22, 32, 51, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-glow: 0 8px 25px rgba(0, 229, 255, 0.2);
+    }
+
+    [data-theme="light"] {
+      --bg-body: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --border-color: #e2e8f0;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
+      
+      --gradient-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
+      --shadow-glow: 0 8px 25px rgba(37, 99, 235, 0.15);
     }
 
     * {
@@ -45,527 +72,521 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg-body);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      transition: background-color 0.25s, color 0.25s;
     }
 
-    /* Top Navbar */
-    .site-header {
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    /* Top Navigation Bar */
+    .site-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-dark);
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    [data-theme="light"] .site-nav {
+      background: rgba(255, 255, 255, 0.92);
     }
 
-    .header-container {
-      max-width: 1280px;
+    .nav-container {
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 12px 20px;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 20px;
     }
 
-    .brand {
+    .brand-logo-link {
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
       cursor: pointer;
     }
 
-    .brand-logo-box {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--brand-gradient);
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--gradient-brand);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 20px;
-      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.35);
+      color: #fff;
+      font-size: 22px;
+      box-shadow: 0 4px 16px rgba(0, 229, 255, 0.35);
     }
 
-    .brand-title {
-      font-size: 20px;
+    .brand-text-block h1 {
+      font-size: 21px;
       font-weight: 900;
-      letter-spacing: 0.5px;
+      letter-spacing: -0.5px;
       line-height: 1.1;
     }
+    .brand-text-block h1 span { color: var(--cyan); }
+    [data-theme="light"] .brand-text-block h1 span { color: var(--blue); }
 
-    .brand-title .brand-accent { color: var(--cyan); }
-    
-    .brand-sub {
-      font-size: 9px;
+    .brand-text-block p {
+      font-size: 10px;
       font-weight: 700;
-      color: var(--emerald);
       letter-spacing: 1px;
+      color: var(--emerald);
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
-
-    .brand-sub::before {
+    .brand-text-block p::before {
       content: '';
       width: 6px;
       height: 6px;
       background: var(--emerald);
       border-radius: 50%;
-      box-shadow: 0 0 6px var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
     }
 
-    /* Desktop Search & Nav Items */
-    .desktop-search {
+    /* Global Search Box */
+    .nav-search-wrap {
       flex: 1;
-      max-width: 440px;
+      max-width: 500px;
       position: relative;
     }
 
-    .desktop-search input {
+    .nav-search-input {
       width: 100%;
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      padding: 10px 16px 10px 42px;
-      color: white;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 11px 18px 11px 44px;
+      color: var(--text-main);
       font-size: 14px;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.2s;
     }
-
-    .desktop-search input:focus {
+    .nav-search-input:focus {
       border-color: var(--cyan);
-      box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
     }
-
-    .desktop-search i {
+    .nav-search-wrap i {
       position: absolute;
-      left: 14px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--cyan);
-      font-size: 14px;
+      font-size: 15px;
     }
 
-    .header-nav-links {
+    .nav-actions {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .nav-btn {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
+    .btn-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      text-decoration: none;
+      gap: 8px;
       transition: all 0.2s;
     }
-
-    .nav-btn:hover {
-      background: var(--card-highlight);
+    .btn-nav:hover {
+      background: var(--bg-card-hover);
       border-color: var(--cyan);
       color: var(--cyan);
     }
 
-    .nav-btn.upload-btn {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(37, 99, 235, 0.25));
-      border-color: var(--cyan);
-      color: var(--cyan);
+    .btn-nav-primary {
+      background: var(--gradient-brand);
+      border: none;
+      color: #fff !important;
+      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.3);
+    }
+    .btn-nav-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.45);
     }
 
-    .nav-btn.admin-pill {
-      background: rgba(99, 102, 241, 0.12);
-      border-color: rgba(99, 102, 241, 0.35);
-      color: #a5b4fc;
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
     }
+    .theme-toggle-btn:hover { border-color: var(--amber); color: var(--amber); }
 
-    /* Main Container */
-    .app-viewport {
-      max-width: 1280px;
+    /* Main Content Wrapper */
+    .main-viewport {
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 24px;
       flex: 1;
       width: 100%;
     }
 
-    /* Direct Drag & Drop ZIP / APK Banner */
-    .direct-zip-banner {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
-      border: 2px dashed rgba(0, 229, 255, 0.4);
-      border-radius: 18px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .direct-zip-banner:hover {
-      border-color: var(--cyan);
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(124, 58, 237, 0.22));
-    }
-
-    .zip-banner-text h4 {
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .zip-banner-text p {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* Hero Section */
-    .hero-container {
-      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.18), transparent 60%),
-                  radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.15), transparent 50%),
-                  var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 24px;
-      padding: 28px 24px;
-      margin-bottom: 20px;
+    /* Hero Showcase - Dynamically Powered by Latest Published App */
+    .hero-banner {
+      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.22), transparent 55%),
+                  radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.18), transparent 45%),
+                  var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      margin-bottom: 28px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 32px;
+      align-items: center;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
-    .hero-badge {
+    .hero-badge-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: rgba(0, 229, 255, 0.12);
-      border: 1px solid rgba(0, 229, 255, 0.3);
+      border: 1px solid rgba(0, 229, 255, 0.35);
       padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
+      border-radius: 30px;
+      font-size: 11.5px;
+      font-weight: 800;
       color: var(--cyan);
-      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
     }
 
     .hero-title {
-      font-size: 28px;
+      font-size: 34px;
       font-weight: 900;
-      line-height: 1.25;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    [data-theme="light"] .hero-title {
+      background: linear-gradient(135deg, #0f172a 40%, #334155 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-desc {
-      font-size: 13.5px;
-      line-height: 1.6;
+    .hero-lead {
+      font-size: 14.5px;
+      line-height: 1.65;
       color: var(--text-muted);
-      max-width: 650px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
+      max-width: 620px;
     }
 
-    .hero-actions {
+    .hero-cta-group {
       display: flex;
       flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-hero-primary {
+      background: var(--gradient-emerald);
+      color: white;
+      border: none;
+      padding: 13px 24px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
-    }
-
-    .btn-action-primary {
-      background: var(--brand-gradient);
-      color: white;
-      border: none;
-      padding: 11px 20px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      box-shadow: 0 4px 16px rgba(0, 229, 255, 0.3);
-      transition: transform 0.2s;
-    }
-
-    .btn-action-primary:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-action-upload {
-      background: var(--emerald-gradient);
-      color: white;
-      border: none;
-      padding: 11px 18px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-      transition: transform 0.2s;
-    }
-
-    .btn-action-outline {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-dark);
-      color: white;
-      padding: 11px 16px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
       transition: all 0.2s;
     }
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+    }
 
-    .hero-showcase {
+    .btn-hero-secondary {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 13px 20px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-hero-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Hero Dynamic Latest Showcase Card */
+    .hero-featured-card {
       background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 20px;
-      padding: 18px;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 18px;
+      box-shadow: var(--shadow-glow);
+    }
+    [data-theme="light"] .hero-featured-card {
+      background: #ffffff;
+      border-color: rgba(37, 99, 235, 0.25);
     }
 
-    .showcase-header {
+    .featured-head {
       display: flex;
+      gap: 16px;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
     }
 
-    .showcase-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: var(--emerald-gradient);
+    .featured-icon-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--gradient-brand);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 22px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-    }
-
-    .showcase-info h4 {
-      font-size: 16px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .showcase-info p {
-      font-size: 11px;
-      color: var(--emerald);
-      font-weight: 600;
-    }
-
-    /* Live Market Stats Ribbon */
-    .stats-ribbon {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 16px;
-      padding: 12px 18px;
-      margin-bottom: 20px;
-      gap: 12px;
-    }
-
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .stat-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
+      font-size: 28px;
       flex-shrink: 0;
+      box-shadow: 0 6px 18px rgba(0, 229, 255, 0.3);
+      object-fit: cover;
     }
 
-    .stat-num {
-      font-size: 15px;
-      font-weight: 800;
+    .featured-meta h3 {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 4px;
     }
 
-    .stat-name {
+    .featured-tags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-badge {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
       font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 700;
+    }
+    .pill-badge.latest {
+      background: rgba(16, 185, 129, 0.18);
+      color: var(--emerald);
+      border-color: rgba(16, 185, 129, 0.4);
     }
 
-    /* Horizontal Category Scroll Bar */
-    .category-pills {
+    .featured-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .featured-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+    }
+
+    /* Category & Filter Row */
+    .controls-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .category-pills-list {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 18px;
+      padding-bottom: 4px;
       scrollbar-width: thin;
     }
 
-    .category-pills::-webkit-scrollbar { height: 4px; }
-    .category-pills::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
-
     .cat-btn {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      padding: 8px 14px;
-      border-radius: 10px;
-      font-size: 12.5px;
-      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       transition: all 0.2s;
     }
-
     .cat-btn:hover, .cat-btn.active {
       background: rgba(0, 229, 255, 0.12);
       border-color: var(--cyan);
       color: var(--cyan);
     }
+    [data-theme="light"] .cat-btn:hover, [data-theme="light"] .cat-btn.active {
+      background: rgba(37, 99, 235, 0.1);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
 
-    /* Section Title */
-    .section-head {
-      font-size: 17px;
-      font-weight: 800;
-      margin-bottom: 14px;
+    .sort-dropdown {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Section Headers */
+    .section-title-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .section-title-bar h2 {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-bar span {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
-    /* Responsive App Cards Grid */
-    .apps-grid-view {
+    /* Apps Grid Layout */
+    .apps-marketplace-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 16px;
-      margin-bottom: 36px;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
     }
 
-    .market-card {
-      background: var(--card-gradient);
-      border: 1px solid var(--border-dark);
-      border-radius: 18px;
-      padding: 16px;
-      transition: all 0.25s ease;
+    .app-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
       display: flex;
       flex-direction: column;
+      transition: all 0.25s ease;
       cursor: pointer;
       position: relative;
     }
-
-    .market-card:hover {
+    .app-card:hover {
       border-color: var(--cyan);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
 
-    .card-top {
+    .app-card-top {
       display: flex;
-      gap: 12px;
-      margin-bottom: 10px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
 
-    .app-icon-art {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background: var(--brand-gradient);
+    .app-icon-frame {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--gradient-brand);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 24px;
       color: white;
       flex-shrink: 0;
       box-shadow: 0 4px 12px rgba(0, 229, 255, 0.25);
+      object-fit: cover;
     }
 
-    .card-title-group h3 {
-      font-size: 15px;
+    .app-card-headings h3 {
+      font-size: 16px;
       font-weight: 800;
-      color: #fff;
-      margin-bottom: 2px;
+      color: var(--text-main);
+      margin-bottom: 3px;
     }
 
-    .card-dev-badge {
-      font-size: 11.5px;
+    .app-dev-row {
+      font-size: 12px;
       color: var(--text-muted);
       display: flex;
       align-items: center;
-      gap: 4px;
-      margin-bottom: 4px;
+      gap: 5px;
+      margin-bottom: 6px;
     }
 
-    .card-tag-row {
+    .app-meta-pills {
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
 
-    .pill-tag {
-      background: rgba(99, 102, 241, 0.15);
-      color: #a5b4fc;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 10.5px;
-      font-weight: 700;
-    }
-
-    .pill-tag.rating-tag {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--amber);
-    }
-
-    .pill-tag.custom-tag {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--emerald);
-    }
-
-    .card-desc {
-      font-size: 12.5px;
+    .app-card-desc {
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 12px;
+      line-height: 1.5;
+      margin-bottom: 16px;
       flex: 1;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -573,77 +594,340 @@
       overflow: hidden;
     }
 
-    .card-bottom-bar {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 10px;
+    .app-card-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .card-version-label {
-      font-size: 11.5px;
-      font-weight: 700;
+    .app-info-labels {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-weight: 600;
+    }
+    .app-info-labels strong {
       color: var(--cyan);
+      font-weight: 800;
     }
+    [data-theme="light"] .app-info-labels strong { color: var(--blue); }
 
-    .card-size-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .btn-apk-dl {
-      background: var(--blue);
+    .btn-download-quick {
+      background: var(--gradient-emerald);
       color: white;
       border: none;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 800;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: background 0.2s;
+      transition: all 0.2s;
+    }
+    .btn-download-quick:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
     }
 
-    .btn-apk-dl:hover {
-      background: var(--indigo);
+    /* Single App Details View (`#/app/:slug`) */
+    .app-details-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      margin-bottom: 60px;
     }
 
-    /* Mobile Bottom Navigation Dock */
-    .mobile-bottom-nav {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border-dark);
-      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-      z-index: 999;
-      justify-content: space-around;
+    .app-detail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .app-header-master {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .app-icon-large {
+      width: 90px;
+      height: 90px;
+      border-radius: 22px;
+      background: var(--gradient-brand);
+      display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.35);
+      object-fit: cover;
     }
 
-    .mob-nav-item {
+    .app-details-meta h1 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .verified-dev-banner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .detail-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    /* Screenshots Carousel */
+    .screenshots-strip {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 12px 0 16px;
+      margin-bottom: 24px;
+      scrollbar-width: thin;
+    }
+
+    .screenshot-thumb {
+      width: 180px;
+      height: 320px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      justify-content: center;
       color: var(--text-muted);
-      text-decoration: none;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 8px;
+      font-size: 13px;
+      text-align: center;
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .mob-nav-item i { font-size: 17px; }
-    .mob-nav-item.active { color: var(--cyan); background: rgba(0, 229, 255, 0.1); }
+    /* Description & Features Box */
+    .prose-section {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+      margin-bottom: 24px;
+    }
+    .prose-section h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 20px 0 10px;
+      color: var(--cyan);
+    }
+    [data-theme="light"] .prose-section h3 { color: var(--blue); }
+
+    .features-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .features-list li {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .features-list li i { color: var(--emerald); }
+
+    /* Version History Section */
+    .version-history-box {
+      margin-top: 24px;
+    }
+    .version-item-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .version-item-card.is-latest {
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    /* Sidebar Download Box */
+    .download-sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      position: sticky;
+      top: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .btn-main-install {
+      background: var(--gradient-emerald);
+      color: white;
+      border: none;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-main-install:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(16, 185, 129, 0.55);
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table tr { border-bottom: 1px solid var(--border-subtle); }
+    .spec-table td {
+      padding: 10px 0;
+      font-size: 13px;
+    }
+    .spec-table td:first-child { color: var(--text-muted); }
+    .spec-table td:last-child { text-align: right; font-weight: 700; color: var(--text-main); }
+
+    /* Step-by-Step Installation Guide */
+    .install-guide-strip {
+      background: rgba(0, 229, 255, 0.05);
+      border: 1px dashed rgba(0, 229, 255, 0.35);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+    .install-guide-strip strong { color: var(--cyan); }
+    [data-theme="light"] .install-guide-strip strong { color: var(--blue); }
+
+    /* Admin Dashboard (`#/admin`) */
+    .admin-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .admin-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .stat-icon-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .admin-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .data-table th {
+      padding: 12px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .data-table td {
+      padding: 14px;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-action-sm {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-action-sm:hover { border-color: var(--cyan); color: var(--cyan); }
+    .btn-action-sm.danger:hover { border-color: var(--rose); color: var(--rose); }
 
     /* Modals */
     .modal-backdrop {
@@ -651,811 +935,1407 @@
       inset: 0;
       background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(8px);
-      z-index: 1100;
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 20px;
     }
 
-    .modal-content-box {
-      background: var(--surface-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 22px;
-      max-width: 460px;
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      max-width: 600px;
       width: 100%;
-      padding: 22px;
-      text-align: center;
-      animation: popAnim 0.2s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      animation: modalFade 0.2s ease-out;
+    }
+    @keyframes modalFade {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes popAnim {
-      from { transform: scale(0.94); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
     }
+    .modal-head h3 { font-size: 18px; font-weight: 800; }
 
-    .download-meter-bg {
-      background: var(--card-highlight);
-      height: 9px;
-      border-radius: 9px;
-      overflow: hidden;
-      margin: 14px 0 10px;
+    .form-group {
+      margin-bottom: 16px;
     }
-
-    .download-meter-fill {
-      background: var(--brand-gradient);
-      height: 100%;
-      width: 0%;
-      transition: width 0.15s;
+    .form-group label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
-
-    .form-group { text-align: left; margin-bottom: 12px; }
-    .form-group label { font-size: 11.5px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px; }
-    .form-input, .form-select, .form-textarea {
+    .form-control {
       width: 100%;
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 9px 12px;
-      color: white;
-      font-size: 13px;
+      padding: 10px 14px;
+      color: var(--text-main);
+      font-size: 13.5px;
       outline: none;
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--cyan); }
+    .form-control:focus {
+      border-color: var(--cyan);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast-msg {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      animation: toastIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .toast-msg.success { border-color: var(--emerald); }
+    .toast-msg.error { border-color: var(--rose); }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
     /* Footer */
     .site-footer {
-      background: var(--surface-dark);
-      border-top: 1px solid var(--border-dark);
-      padding: 30px 20px 80px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      padding: 40px 24px 30px;
       margin-top: auto;
     }
 
-    .footer-wrap {
-      max-width: 1280px;
+    .footer-content-wrap {
+      max-width: 1320px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
     }
 
-    .footer-col h4 { font-size: 14px; font-weight: 800; margin-bottom: 10px; color: #fff; }
-    .footer-col p, .footer-col li { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; list-style: none; }
-    .footer-col a { color: var(--text-muted); text-decoration: none; }
+    .footer-col h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .footer-col p, .footer-col li {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      list-style: none;
+      margin-bottom: 6px;
+    }
     .footer-col a:hover { color: var(--cyan); }
 
-    .footer-bottom-line {
-      max-width: 1280px;
+    .footer-bottom-bar {
+      max-width: 1320px;
       margin: 0 auto;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-dark);
+      padding-top: 18px;
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
-      font-size: 11.5px;
+      align-items: center;
+      font-size: 12px;
       color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    @media (min-width: 769px) {
-      .hero-container { grid-template-columns: 1.4fr 1fr; align-items: center; }
-      .mobile-bottom-nav { display: none; }
-      .site-footer { padding-bottom: 30px; }
+    /* Responsive Queries */
+    @media (max-width: 960px) {
+      .hero-banner { grid-template-columns: 1fr; gap: 20px; }
+      .app-details-container { grid-template-columns: 1fr; }
+      .download-sidebar-card { position: static; }
+      .features-list { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 768px) {
-      .desktop-search { display: none; }
-      .header-nav-links .nav-btn:not(.upload-btn) { display: none; }
-      .hero-showcase { display: none; }
-      .stats-ribbon { grid-template-columns: 1fr; gap: 8px; }
-      .apps-grid-view { grid-template-columns: 1fr; }
-      .mobile-bottom-nav { display: flex; }
-      .modal-backdrop { align-items: flex-end; padding: 0; }
-      .modal-content-box { border-radius: 22px 22px 0 0; max-width: 100%; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+    @media (max-width: 640px) {
+      .nav-search-wrap { display: none; }
+      .nav-container { padding: 12px 16px; }
+      .main-viewport { padding: 16px; }
+      .apps-marketplace-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-title { font-size: 26px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Header -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand" onclick="filterCategory('All')">
-        <div class="brand-logo-box"><i class="fa-solid fa-brain"></i></div>
-        <div>
-          <div class="brand-title"><span class="brand-accent">MIND</span> STORE</div>
-          <div class="brand-sub">OFFICIAL APK HUB</div>
+  <!-- Top Sticky Navigation Bar -->
+  <header class="site-nav">
+    <div class="nav-container">
+      <a href="#/" class="brand-logo-link">
+        <div class="logo-badge"><i class="fa-solid fa-cubes"></i></div>
+        <div class="brand-text-block">
+          <h1><span>MIND</span> STORE</h1>
+          <p>OFFICIAL APK MARKETPLACE</p>
         </div>
-      </div>
+      </a>
 
-      <div class="desktop-search">
+      <div class="nav-search-wrap">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Search apps, APKs, categories..." onkeyup="handleSearch()">
+        <input type="text" id="globalSearchInput" class="nav-search-input" placeholder="Search APKs, tools, versions..." oninput="handleGlobalSearch()">
       </div>
 
-      <div class="header-nav-links">
-        <button class="nav-btn upload-btn" onclick="openUploadModal()">
-          <i class="fa-solid fa-file-zipper"></i> + Add APK / ZIP
+      <div class="nav-actions">
+        <button class="btn-nav btn-nav-primary" onclick="openAddAppModal()">
+          <i class="fa-solid fa-cloud-arrow-up"></i> <span>Publish APK</span>
         </button>
-        <button class="nav-btn mode-switcher" id="modeToggleBtn" onclick="toggleDisplayMode()">
-          <i class="fa-solid fa-desktop"></i> <span id="modeText">Auto Mode</span>
+        <a href="#/admin" class="btn-nav">
+          <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
+        </a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
         </button>
-        <button class="nav-btn admin-pill" onclick="openAdminPrompt()"><i class="fa-solid fa-lock"></i> Admin</button>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="app-viewport">
-
-    <!-- Direct ZIP / APK Drop Banner -->
-    <div class="direct-zip-banner" onclick="openUploadModal()">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 42px; height: 42px; background: var(--brand-gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white;">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </div>
-        <div class="zip-banner-text">
-          <h4><i class="fa-solid fa-bolt" style="color: var(--cyan);"></i> Direct APK / ZIP Upload Engine</h4>
-          <p>Tap to upload your APK/ZIP file. It instantly appears on this store for all users to download!</p>
-        </div>
-      </div>
-      <button class="btn-action-primary" style="padding: 7px 14px; font-size: 12px;">
-        <i class="fa-solid fa-plus"></i> Upload File
-      </button>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero-container">
-      <div>
-        <div class="hero-badge">
-          <i class="fa-solid fa-bolt"></i> FAST DIRECT APKS • CREATED BY AJAY
-        </div>
-        <h1 class="hero-title">Next-Gen Android Apps & Direct APK Hub</h1>
-        <p class="hero-desc">
-          Official publishing portal by <strong>Ajay</strong>. Download verified APK binaries for smart agriculture (<strong>Ajay Kishan AI</strong>), tools, and AI utilities with zero ads and direct sideloading.
-        </p>
-        <div class="hero-actions">
-          <button class="btn-action-primary" onclick="initiateRealDownload('Ajay Kishan AI', 'v2.5.0', '22.4 MB', 'Ajay_Kishan_AI_v2.5.0.apk')">
-            <i class="fa-solid fa-download"></i> Get Ajay Kishan AI (APK)
-          </button>
-          <button class="btn-action-upload" onclick="openUploadModal()">
-            <i class="fa-solid fa-file-arrow-up"></i> Add Your APK / ZIP
-          </button>
-          <button class="btn-action-outline" onclick="showGuideModal()">
-            <i class="fa-solid fa-book-open"></i> Install Guide
-          </button>
-        </div>
-      </div>
-
-      <div class="hero-showcase">
-        <div>
-          <div style="font-size: 10.5px; font-weight: 800; color: var(--cyan); letter-spacing: 0.8px; margin-bottom: 6px;">
-            ★ FEATURED #1 FLAGSHIP RELEASE
-          </div>
-          <div class="showcase-header">
-            <div class="showcase-icon"><i class="fa-solid fa-wheat-awn"></i></div>
-            <div class="showcase-info">
-              <h4>Ajay Kishan AI</h4>
-              <p>v2.5.0 • Official Release</p>
-            </div>
-          </div>
-          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
-            AI Crop Doctor, Live APMC Mandi Bhav across 500+ markets, rain alerts, and 24/7 Hindi Voice Kisan Assistant.
-          </p>
-        </div>
-        <button class="btn-apk-dl" style="width: 100%; justify-content: center; background: var(--emerald-gradient);" onclick="initiateRealDownload('Ajay Kishan AI', 'v2.5.0', '22.4 MB', 'Ajay_Kishan_AI_v2.5.0.apk')">
-          <i class="fa-solid fa-download"></i> Direct Download (22.4 MB)
-        </button>
-      </div>
-    </section>
-
-    <!-- Stats Ribbon -->
-    <section class="stats-ribbon">
-      <div class="stat-item">
-        <div class="stat-circle" style="background: rgba(0, 229, 255, 0.15); color: var(--cyan);"><i class="fa-solid fa-cubes"></i></div>
-        <div>
-          <div class="stat-num" id="totalAppsCount">6 Verified</div>
-          <div class="stat-name">Published Apps</div>
-        </div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-circle" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald);"><i class="fa-solid fa-download"></i></div>
-        <div>
-          <div class="stat-num">50,000+</div>
-          <div class="stat-name">Total Downloads</div>
-        </div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-circle" style="background: rgba(245, 158, 11, 0.15); color: var(--amber);"><i class="fa-solid fa-star"></i></div>
-        <div>
-          <div class="stat-num">4.9 ★</div>
-          <div class="stat-name">User Rating</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Categories -->
-    <div class="category-pills" id="categoryPillRow">
-      <button class="cat-btn active" onclick="filterCategory('All')"><i class="fa-solid fa-globe"></i> All Apps</button>
-      <button class="cat-btn" onclick="filterCategory('Farming')"><i class="fa-solid fa-wheat-awn"></i> Farming</button>
-      <button class="cat-btn" onclick="filterCategory('AI Apps')"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Apps</button>
-      <button class="cat-btn" onclick="filterCategory('Tools')"><i class="fa-solid fa-screwdriver-wrench"></i> Tools</button>
-      <button class="cat-btn" onclick="filterCategory('Productivity')"><i class="fa-solid fa-chart-line"></i> Productivity</button>
-      <button class="cat-btn" onclick="filterCategory('Custom Uploads')"><i class="fa-solid fa-upload"></i> My Uploads</button>
-    </div>
-
-    <!-- Section Header -->
-    <div class="section-head" id="apps">
-      <span><i class="fa-solid fa-layer-group" style="color: var(--cyan);"></i> Available APK Downloads</span>
-      <span id="appCountText" style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Showing Apps</span>
-    </div>
-
-    <!-- Apps Grid -->
-    <div class="apps-grid-view" id="appsGrid"></div>
-
+  <!-- Main Viewport (Dynamically Routed) -->
+  <main class="main-viewport" id="appRouterView">
+    <!-- Rendered via JavaScript Router -->
   </main>
 
-  <!-- Mobile Bottom Nav -->
-  <nav class="mobile-bottom-nav">
-    <a class="mob-nav-item active" onclick="filterCategory('All'); setActiveMobNav(this)">
-      <i class="fa-solid fa-house"></i><span>Home</span>
-    </a>
-    <a class="mob-nav-item" onclick="openUploadModal(); setActiveMobNav(this)">
-      <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cyan);"></i><span>Add App</span>
-    </a>
-    <a class="mob-nav-item" onclick="filterCategory('Farming'); setActiveMobNav(this)">
-      <i class="fa-solid fa-wheat-awn"></i><span>Farming</span>
-    </a>
-    <a class="mob-nav-item" onclick="showGuideModal(); setActiveMobNav(this)">
-      <i class="fa-solid fa-circle-question"></i><span>Guide</span>
-    </a>
-    <a class="mob-nav-item" onclick="openAdminPrompt(); setActiveMobNav(this)">
-      <i class="fa-solid fa-shield"></i><span>Admin</span>
-    </a>
-  </nav>
-
-  <!-- Upload Modal -->
-  <div class="modal-backdrop" id="uploadModal">
-    <div class="modal-content-box" style="text-align: left; max-width: 480px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-size: 17px; font-weight: 800; color: #fff;">
-          <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cyan);"></i> Upload APK / ZIP Package
-        </h3>
-        <button onclick="closeUploadModal()" style="background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer;">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div style="background: rgba(0, 229, 255, 0.08); border: 1px dashed var(--cyan); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 14px; cursor: pointer;" onclick="document.getElementById('fileUploadInput').click()">
-        <i class="fa-solid fa-file-zipper" style="font-size: 28px; color: var(--cyan); margin-bottom: 6px;"></i>
-        <div style="font-size: 13px; font-weight: 700; color: #fff;" id="uploadFileStatus">Choose APK or ZIP file from device</div>
-        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">Supports .apk, .zip, .xapk (Ready for instant download)</div>
-        <input type="file" id="fileUploadInput" accept=".apk,.zip,.xapk" style="display: none;" onchange="onFileChosen(event)">
-      </div>
-
-      <div class="form-group">
-        <label>App Name</label>
-        <input type="text" id="newAppName" class="form-input" placeholder="e.g. Ajay Kishan AI or My App">
-      </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-        <div class="form-group">
-          <label>Category</label>
-          <select id="newAppCategory" class="form-select">
-            <option value="Farming">Farming</option>
-            <option value="AI Apps">AI Apps</option>
-            <option value="Tools">Tools</option>
-            <option value="Productivity">Productivity</option>
-            <option value="Education">Education</option>
-            <option value="Custom Uploads">Custom Uploads</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Version</label>
-          <input type="text" id="newAppVersion" class="form-input" placeholder="v1.0.0">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>App Description</label>
-        <textarea id="newAppDesc" class="form-textarea" rows="2" placeholder="Describe your app..."></textarea>
-      </div>
-
-      <div style="display: flex; gap: 8px; margin-top: 16px;">
-        <button class="btn-action-outline" style="flex: 1;" onclick="closeUploadModal()">Cancel</button>
-        <button class="btn-action-primary" style="flex: 1.5; justify-content: center; background: var(--emerald-gradient);" onclick="saveAndPublishUploadedApp()">
-          <i class="fa-solid fa-check"></i> Add to Website
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Download Progress Modal -->
-  <div class="modal-backdrop" id="downloadModal">
-    <div class="modal-content-box">
-      <div id="modalDownloading">
-        <div style="width: 48px; height: 48px; border: 4px solid rgba(0, 229, 255, 0.15); border-top-color: var(--cyan); border-radius: 50%; margin: 0 auto 12px; animation: spin 0.8s linear infinite;"></div>
-        <h3 id="dlAppName" style="font-size: 17px; font-weight: 800; margin-bottom: 2px;">Downloading APK...</h3>
-        <p id="dlAppVersion" style="color: var(--cyan); font-size: 12.5px; font-weight: 600; margin-bottom: 10px;">Version 2.5.0</p>
-        
-        <div class="download-meter-bg">
-          <div class="download-meter-fill" id="dlProgressBar"></div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
-          <span id="dlBytesText">0.0 MB / 22.4 MB</span>
-          <span id="dlPercentText" style="color: var(--cyan); font-weight: 800;">0%</span>
-        </div>
-
-        <p style="font-size: 11px; color: var(--text-muted);"><i class="fa-solid fa-shield"></i> Direct Verified Package • Checksum OK</p>
-      </div>
-
-      <div id="modalComplete" style="display: none;">
-        <div style="width: 50px; height: 50px; background: rgba(16, 185, 129, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; color: var(--emerald); font-size: 24px;">
-          <i class="fa-solid fa-check"></i>
-        </div>
-        <h3 style="font-size: 17px; font-weight: 800; color: var(--emerald); margin-bottom: 2px;">Download Started!</h3>
-        <p id="dlFileName" style="font-size: 12.5px; color: #fff; margin-bottom: 12px;">Ajay_Kishan_AI_v2.5.0.apk</p>
-        
-        <div style="background: var(--card-highlight); padding: 10px; border-radius: 10px; font-size: 11.5px; color: var(--text-muted); margin-bottom: 14px; text-align: left;">
-          <strong>File Saved:</strong> Check your device's Downloads or Notification bar to install.
-        </div>
-
-        <div style="display: flex; gap: 8px;">
-          <button class="btn-action-outline" style="flex: 1;" onclick="closeDownloadModal()">Done</button>
-          <button class="btn-action-primary" style="flex: 1; background: var(--emerald-gradient);" onclick="showGuideModal()">How to Install</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Installation Guide Modal -->
-  <div class="modal-backdrop" id="guideModal">
-    <div class="modal-content-box" style="text-align: left; max-width: 480px;">
-      <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 12px; color: var(--cyan);"><i class="fa-solid fa-book-open"></i> APK Installation Steps</h3>
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-        <div style="display: flex; gap: 10px;">
-          <span style="width: 24px; height: 24px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">1</span>
-          <div>
-            <strong style="font-size: 12.5px;">Download the APK</strong>
-            <p style="font-size: 11.5px; color: var(--text-muted);">Tap "Download APK" to save the file to your device.</p>
-          </div>
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <span style="width: 24px; height: 24px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">2</span>
-          <div>
-            <strong style="font-size: 12.5px;">Enable Unknown Sources</strong>
-            <p style="font-size: 11.5px; color: var(--text-muted);">Go to Android Settings &gt; Security &gt; Allow "Install from unknown apps".</p>
-          </div>
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <span style="width: 24px; height: 24px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; flex-shrink: 0;">3</span>
-          <div>
-            <strong style="font-size: 12.5px;">Tap Install</strong>
-            <p style="font-size: 11.5px; color: var(--text-muted);">Open the file from your Notifications or Downloads folder and click Install.</p>
-          </div>
-        </div>
-      </div>
-      <button class="btn-action-primary" style="width: 100%; justify-content: center;" onclick="closeGuideModal()">Got it!</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
+  <!-- Global Footer -->
   <footer class="site-footer">
-    <div class="footer-wrap">
+    <div class="footer-content-wrap">
       <div class="footer-col">
-        <h4 style="color: var(--cyan);"><i class="fa-solid fa-brain"></i> Mind Store</h4>
-        <p>Direct Android APK distribution marketplace crafted by <strong>Ajay</strong>. Built for open and high-speed sideloading.</p>
+        <h4 style="color: var(--cyan);"><i class="fa-solid fa-cubes"></i> Mind Store</h4>
+        <p>Advanced, open Android APK publishing platform created by <strong>Ajay</strong>. Unlimited apps, automatic latest version tracking, and zero-ad direct sideloading.</p>
       </div>
       <div class="footer-col">
         <h4>Publisher & Developer</h4>
-        <p><i class="fa-solid fa-user"></i> Developer: <strong>Ajay</strong></p>
+        <p><i class="fa-solid fa-user"></i> Founder: <strong>Ajay</strong></p>
         <p><i class="fa-solid fa-phone"></i> Mobile: <strong>8595311812</strong></p>
         <p><i class="fa-solid fa-envelope"></i> Email: <strong>mindflayer812@gmail.com</strong></p>
       </div>
       <div class="footer-col">
-        <h4>Navigation</h4>
-        <li><a href="#apps">All Applications</a></li>
-        <li><a href="#" onclick="openUploadModal()">Upload New APK / ZIP</a></li>
-        <li><a href="#" onclick="showGuideModal()">Installation Guide</a></li>
-        <li><a href="#" onclick="openAdminPrompt()">Publisher Admin Portal</a></li>
+        <h4>Navigation Links</h4>
+        <li><a href="#/">All Applications</a></li>
+        <li><a href="#/admin">Publisher Admin Dashboard</a></li>
+        <li><a href="javascript:void(0)" onclick="openAddAppModal()">Publish New App</a></li>
+      </div>
+      <div class="footer-col">
+        <h4>Security & Compliance</h4>
+        <p><i class="fa-solid fa-shield-check" style="color: var(--emerald);"></i> Android APK Safe Verification</p>
+        <p><i class="fa-solid fa-check"></i> Standard Unknown Sources Installer</p>
+        <p><i class="fa-solid fa-database"></i> IndexedDB Local & Cloud Ready Engine</p>
       </div>
     </div>
-    <div class="footer-bottom-line">
+    <div class="footer-bottom-bar">
       <span>© 2026 Mind Store by Ajay. All rights reserved.</span>
-      <span>100% Direct APK Sideloading</span>
+      <span>Engine: Web Marketplace v3.0 • Direct APK Sideloading</span>
     </div>
   </footer>
 
+  <!-- Add New App Modal -->
+  <div class="modal-backdrop" id="addAppModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3><i class="fa-solid fa-cloud-arrow-up" style="color: var(--cyan);"></i> Add & Publish New App</h3>
+        <button onclick="closeModal('addAppModal')" style="background:none; border:none; color:var(--text-muted); font-size:18px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="newAppForm" onsubmit="handleCreateAppSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>App Name *</label>
+            <input type="text" id="appFormName" class="form-control" placeholder="e.g. Ajay AI Kisan" required oninput="autoGenerateSlug()">
+          </div>
+          <div class="form-group">
+            <label>URL Slug *</label>
+            <input type="text" id="appFormSlug" class="form-control" placeholder="e.g. ajay-ai-kisan" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="appFormCategory" class="form-control">
+              <option value="Farming & Agriculture">Farming & Agriculture</option>
+              <option value="Artificial Intelligence">Artificial Intelligence</option>
+              <option value="Tools & Utilities">Tools & Utilities</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Photography">Photography</option>
+              <option value="Education">Education</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Icon Style / FontAwesome *</label>
+            <input type="text" id="appFormIcon" class="form-control" placeholder="fa-wheat-awn or fa-robot" value="fa-mobile-screen">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Short Tagline / Headline *</label>
+          <input type="text" id="appFormTagline" class="form-control" placeholder="Smart AI assistant for farmers and live mandi rates" required>
+        </div>
+
+        <div class="form-group">
+          <label>Full Description *</label>
+          <textarea id="appFormDesc" class="form-control" rows="3" placeholder="Explain the features, capabilities, and purpose of this app..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Initial Version Number *</label>
+            <input type="text" id="appFormVersion" class="form-control" placeholder="1.0.0" value="1.0.0" required>
+          </div>
+          <div class="form-group">
+            <label>Android Requirement</label>
+            <input type="text" id="appFormMinSdk" class="form-control" placeholder="Android 8.0+" value="Android 8.0+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Select APK / Binary File (Optional)</label>
+          <input type="file" id="appFormApkFile" class="form-control" accept=".apk,.zip,.xapk">
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn-nav" style="flex: 1;" onclick="closeModal('addAppModal')">Cancel</button>
+          <button type="submit" class="btn-nav btn-nav-primary" style="flex: 2; justify-content: center;">
+            <i class="fa-solid fa-check"></i> Publish App to Store
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Upload New Version Modal -->
+  <div class="modal-backdrop" id="uploadVersionModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3><i class="fa-solid fa-code-branch" style="color: var(--emerald);"></i> Upload New APK Version</h3>
+        <button onclick="closeModal('uploadVersionModal')" style="background:none; border:none; color:var(--text-muted); font-size:18px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="newVersionForm" onsubmit="handleUploadVersionSubmit(event)">
+        <input type="hidden" id="verFormAppId">
+        <div class="form-group">
+          <label>Target App</label>
+          <input type="text" id="verFormAppName" class="form-control" readonly disabled>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>New Version Number *</label>
+            <input type="text" id="verFormNumber" class="form-control" placeholder="e.g. 1.3.0" required>
+          </div>
+          <div class="form-group">
+            <label>Estimated Size</label>
+            <input type="text" id="verFormSize" class="form-control" placeholder="24.5 MB" value="22.4 MB">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>What's New in this Version / Changelog</label>
+          <textarea id="verFormChangelog" class="form-control" rows="2" placeholder="Bug fixes, performance improvements, new AI camera scanner..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Select APK File *</label>
+          <input type="file" id="verFormFile" class="form-control" accept=".apk,.zip,.xapk">
+        </div>
+        <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:10px;">
+          <input type="checkbox" id="verFormPublishAsLatest" checked style="width:18px; height:18px; cursor:pointer;">
+          <label for="verFormPublishAsLatest" style="margin-bottom:0; cursor:pointer; color:var(--emerald);">
+            <strong>Publish as Latest Version</strong> (Auto-archives previous versions)
+          </label>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn-nav" style="flex: 1;" onclick="closeModal('uploadVersionModal')">Cancel</button>
+          <button type="submit" class="btn-nav btn-nav-primary" style="flex: 2; justify-content: center; background:var(--gradient-emerald);">
+            <i class="fa-solid fa-upload"></i> Publish & Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Download Progress Modal -->
+  <div class="modal-backdrop" id="downloadProgressModal">
+    <div class="modal-box" style="text-align: center; max-width: 440px;">
+      <div id="dlStartingView">
+        <div style="width:52px; height:52px; border:4px solid rgba(0,229,255,0.2); border-top-color:var(--cyan); border-radius:50%; margin:0 auto 16px; animation:spin 0.8s linear infinite;"></div>
+        <h3 id="dlModalTitle" style="font-size:18px; font-weight:800; margin-bottom:4px;">Downloading APK...</h3>
+        <p id="dlModalSubtitle" style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Direct Verified Binary Package</p>
+        
+        <div style="background:var(--bg-card); height:10px; border-radius:10px; overflow:hidden; margin-bottom:8px;">
+          <div id="dlProgressBar" style="background:var(--gradient-brand); height:100%; width:0%; transition:width 0.1s;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted);">
+          <span id="dlBytesStatus">0.0 MB / 22.4 MB</span>
+          <span id="dlPercentStatus" style="color:var(--cyan); font-weight:800;">0%</span>
+        </div>
+      </div>
+
+      <div id="dlCompleteView" style="display: none;">
+        <div style="width:56px; height:56px; background:rgba(16,185,129,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; color:var(--emerald); font-size:28px;">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:var(--emerald); margin-bottom:4px;">Download Completed!</h3>
+        <p id="dlSavedFileName" style="font-size:13px; color:var(--text-main); font-weight:700; margin-bottom:14px; word-break:break-all;">app.apk</p>
+        <div class="install-guide-strip" style="text-align:left; margin-bottom:16px;">
+          <strong>How to Install on Android:</strong><br>
+          1. Tap the notification or open your Downloads folder.<br>
+          2. Allow "Install unknown apps" if prompted.<br>
+          3. Tap <strong>Install</strong> to complete.
+        </div>
+        <button class="btn-nav btn-nav-primary" style="width:100%; justify-content:center;" onclick="closeModal('downloadProgressModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <script>
-    // Default Official Apps Catalog
-    const defaultApps = [
+    /* ==========================================================================
+       1. DATABASE ENGINE & DEFAULT SEED DATA
+       ========================================================================== */
+    const MASTER_ADMIN_PIN = "8595311812";
+    let isAdminLoggedIn = false;
+
+    // Seed Apps with complete multiple-version history
+    const DEFAULT_APPS = [
       {
-        id: "ajay_kishan_ai",
-        name: "Ajay Kishan AI",
-        category: "Farming",
+        id: "app_ajay_ai_kisan",
+        slug: "ajay-ai-kisan",
+        name: "Ajay AI Kisan",
+        category: "Farming & Agriculture",
         developer: "Ajay",
-        rating: "5.0",
-        downloads: "52.0K",
-        version: "v2.5.0",
-        size: "22.4 MB",
-        fileName: "Ajay_Kishan_AI_v2.5.0.apk",
+        tagline: "Smart Kisan AI Crop Doctor, Live APMC Mandi Rates & Rain Alerts",
         icon: "fa-wheat-awn",
-        isFeatured: true,
-        desc: "Official smart agriculture AI app created by Ajay. Instant camera-based crop disease diagnosis, daily APMC Mandi live rates, 7-day weather rain alerts, and 24/7 Hindi voice kisan assistant."
+        minSdk: "Android 8.0+",
+        package: "com.ajay.kisan.ai",
+        downloads: 52400,
+        rating: "5.0",
+        description: "Official smart agriculture platform created by Ajay. Features instant camera-based crop disease diagnosis with Gemini AI vision, live APMC Mandi rates across 500+ Indian grain markets, 7-day hyper-local weather rain forecasts, and 24/7 Hindi Kisan voice assistant.",
+        features: [
+          "Instant AI Crop Disease Detection via Camera",
+          "Live Mandi Rates for 150+ Crops across India",
+          "Automated Organic & Chemical Fertilizer Dosage Planner",
+          "24/7 Hindi Voice Kisan Assistant"
+        ],
+        published_at: "2026-08-20T12:00:00.000Z",
+        updated_at: "2026-08-20T22:30:00.000Z",
+        versions: [
+          {
+            version: "1.2",
+            status: "latest",
+            size: "22.4 MB",
+            fileName: "Ajay_AI_Kisan_v1.2.apk",
+            changelog: "Upgraded Gemini 2.0 Flash camera crop diagnosis, added multi-language mandi voice summaries, and reduced APK size by 20%.",
+            published_at: "2026-08-20T22:30:00.000Z"
+          },
+          {
+            version: "1.1",
+            status: "archived",
+            size: "24.1 MB",
+            fileName: "Ajay_AI_Kisan_v1.1.apk",
+            changelog: "Added mandi price fluctuation charts and live weather radar.",
+            published_at: "2026-08-10T10:00:00.000Z"
+          },
+          {
+            version: "1.0",
+            status: "archived",
+            size: "26.0 MB",
+            fileName: "Ajay_AI_Kisan_v1.0.apk",
+            changelog: "Initial public launch on Mind Store.",
+            published_at: "2026-07-25T08:00:00.000Z"
+          }
+        ]
       },
       {
-        id: "kisan_mitra_ai",
-        name: "Kisan Mitra AI",
-        category: "Farming",
-        developer: "Ajay",
-        rating: "4.9",
-        downloads: "18.5K",
-        version: "v2.1.0",
-        size: "24.5 MB",
-        fileName: "Kisan_Mitra_AI_v2.1.0.apk",
-        icon: "fa-seedling",
-        desc: "AI crop doctor, mandi rate analytics, fertilizer recommendations, and smart farmer advisory."
-      },
-      {
-        id: "smart_agro_farm",
-        name: "Smart Agro Farm Tracker",
-        category: "Farming",
-        developer: "Ajay",
-        rating: "4.8",
-        downloads: "12.3K",
-        version: "v1.4.2",
-        size: "18.2 MB",
-        fileName: "Smart_Agro_Farm_v1.4.2.apk",
-        icon: "fa-tractor",
-        desc: "Farm yield calculator, automated fertilizer dosage planner, harvest ledger, and offline records."
-      },
-      {
-        id: "mind_ai_assistant",
+        id: "app_mind_ai",
+        slug: "mind-ai",
         name: "Mind AI Assistant",
-        category: "AI Apps",
+        category: "Artificial Intelligence",
         developer: "Ajay",
+        tagline: "Multimodal Personal AI Assistant for Voice, Vision & Coding",
+        icon: "fa-brain",
+        minSdk: "Android 9.0+",
+        package: "com.ajay.mind.ai",
+        downloads: 28900,
         rating: "4.9",
-        downloads: "28.1K",
-        version: "v3.0.1",
-        size: "32.0 MB",
-        fileName: "Mind_AI_Assistant_v3.0.1.apk",
-        icon: "fa-robot",
-        desc: "Multimodal intelligent assistant with voice, image analysis, and fast code drafting."
+        description: "An ultra-fast multimodal intelligence app built for on-device reasoning, real-time voice conversations, document summarization, and rapid coding assistance.",
+        features: [
+          "Real-time low-latency voice chat",
+          "PDF and image document parser",
+          "Smart offline notes summarization",
+          "Zero telemetry privacy mode"
+        ],
+        published_at: "2026-08-18T14:00:00.000Z",
+        updated_at: "2026-08-19T18:00:00.000Z",
+        versions: [
+          {
+            version: "2.1.0",
+            status: "latest",
+            size: "28.5 MB",
+            fileName: "Mind_AI_v2.1.0.apk",
+            changelog: "Added fast camera scanner and background voice assistant mode.",
+            published_at: "2026-08-19T18:00:00.000Z"
+          },
+          {
+            version: "2.0.0",
+            status: "archived",
+            size: "30.2 MB",
+            fileName: "Mind_AI_v2.0.0.apk",
+            changelog: "Major UI overhaul and dark mode redesign.",
+            published_at: "2026-08-01T12:00:00.000Z"
+          }
+        ]
       },
       {
-        id: "agro_mandi_live",
-        name: "Agro Mandi Live Rates",
-        category: "Tools",
+        id: "app_photo_editor",
+        slug: "photo-editor",
+        name: "Photo Editor Pro",
+        category: "Photography",
         developer: "Ajay",
-        rating: "4.7",
-        downloads: "9.4K",
-        version: "v1.2.0",
-        size: "14.8 MB",
-        fileName: "Agro_Mandi_Live_v1.2.0.apk",
-        icon: "fa-chart-simple",
-        desc: "Live daily mandi rates across all Indian states with price trends and volume tracking."
-      },
-      {
-        id: "mind_speed_booster",
-        name: "Mind Speed Booster",
-        category: "Tools",
-        developer: "Ajay",
+        tagline: "AI Background Eraser, 4K Upscaler & Pro Color Grading",
+        icon: "fa-wand-magic-sparkles",
+        minSdk: "Android 8.0+",
+        package: "com.ajay.photo.editor",
+        downloads: 19400,
         rating: "4.8",
-        downloads: "15.7K",
-        version: "v2.0.0",
-        size: "8.5 MB",
-        fileName: "Mind_Speed_Booster_v2.0.0.apk",
+        description: "Powerful photo editing suite with neural filters, background replacement, watermarking tools, and lossless batch image compression.",
+        features: [
+          "One-tap AI Background Remover",
+          "4K Ultra-HD Upscaling",
+          "Over 60+ Cinematic Color LUTs",
+          "No Watermark Export"
+        ],
+        published_at: "2026-08-15T09:00:00.000Z",
+        updated_at: "2026-08-15T09:00:00.000Z",
+        versions: [
+          {
+            version: "1.0.4",
+            status: "latest",
+            size: "18.8 MB",
+            fileName: "Photo_Editor_Pro_v1.0.4.apk",
+            changelog: "Enhanced RAW photo rendering and GPU acceleration.",
+            published_at: "2026-08-15T09:00:00.000Z"
+          }
+        ]
+      },
+      {
+        id: "app_mind_speed_booster",
+        slug: "speed-booster",
+        name: "Mind Speed Booster",
+        category: "Tools & Utilities",
+        developer: "Ajay",
+        tagline: "Clean Memory, APK Extractor & Battery Health Monitor",
         icon: "fa-bolt",
-        desc: "Ultra lightweight Android memory optimizer, APK extractor, and cache cleaner."
+        minSdk: "Android 7.0+",
+        package: "com.ajay.mind.booster",
+        downloads: 16200,
+        rating: "4.8",
+        description: "Lightweight utility tool that frees cached storage, analyzes battery drain apps, extracts APKs of installed apps, and optimizes CPU thermal states.",
+        features: [
+          "Single-tap Junk Cleaner",
+          "Installed App APK Extractor & Sideload Exporter",
+          "Battery Health & Temperature Gauge",
+          "Zero Background Service Overhead"
+        ],
+        published_at: "2026-08-12T11:00:00.000Z",
+        updated_at: "2026-08-12T11:00:00.000Z",
+        versions: [
+          {
+            version: "1.4.0",
+            status: "latest",
+            size: "6.8 MB",
+            fileName: "Mind_Speed_Booster_v1.4.0.apk",
+            changelog: "Added direct APK backup share feature.",
+            published_at: "2026-08-12T11:00:00.000Z"
+          }
+        ]
       }
     ];
 
-    // Load Local Uploaded Apps from LocalStorage
-    let customUploadedApps = [];
-    try {
-      const stored = localStorage.getItem("mindstore_custom_apps");
-      if (stored) {
-        customUploadedApps = JSON.parse(stored);
+    // Load Database from LocalStorage or initialize with seed
+    function getStoreApps() {
+      try {
+        const data = localStorage.getItem("mindstore_db_apps_v3");
+        if (data) return JSON.parse(data);
+      } catch(e) {
+        console.error("Failed to read DB", e);
       }
-    } catch(e) {
-      console.warn("Storage read error", e);
+      saveStoreApps(DEFAULT_APPS);
+      return DEFAULT_APPS;
     }
 
-    let allApps = [...customUploadedApps, ...defaultApps];
-    let currentCategory = 'All';
-    let currentMode = 'auto';
-    let activeFileBlob = null;
-    let activeFileName = '';
+    function saveStoreApps(apps) {
+      try {
+        localStorage.setItem("mindstore_db_apps_v3", JSON.stringify(apps));
+      } catch(e) {
+        console.error("Failed to write DB", e);
+      }
+    }
 
-    function renderApps(list) {
-      const container = document.getElementById('appsGrid');
-      const countText = document.getElementById('appCountText');
-      const totalCount = document.getElementById('totalAppsCount');
+    /* ==========================================================================
+       2. SINGLE PAGE APPLICATION (SPA) ROUTER
+       ========================================================================== */
+    let currentCategory = "All";
+    let currentSort = "latest";
+    let searchQuery = "";
+
+    function initRouter() {
+      window.addEventListener("hashchange", handleRouteChange);
+      handleRouteChange();
+    }
+
+    function handleRouteChange() {
+      const hash = window.location.hash || "#/";
+      const routerView = document.getElementById("appRouterView");
+      window.scrollTo(0, 0);
+
+      if (hash.startsWith("#/app/")) {
+        const slug = hash.replace("#/app/", "").split("?")[0];
+        renderAppDetailsPage(slug);
+      } else if (hash.startsWith("#/admin")) {
+        renderAdminDashboardPage();
+      } else {
+        renderHomePage();
+      }
+    }
+
+    /* ==========================================================================
+       3. HOMEPAGE VIEW
+       ========================================================================== */
+    function renderHomePage() {
+      const apps = getStoreApps();
       
-      countText.innerText = `Showing ${list.length} Apps`;
-      totalCount.innerText = `${allApps.length} Verified`;
+      // Automatic detection: Sort apps by updated_at / published_at descending for latest
+      const sortedByLatest = [...apps].sort((a, b) => new Date(b.updated_at || b.published_at) - new Date(a.updated_at || a.published_at));
+      const latestApp = sortedByLatest[0] || null;
+      const latestVersionObj = latestApp ? (latestApp.versions.find(v => v.status === "latest") || latestApp.versions[0]) : null;
 
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: var(--text-muted);">
-            <i class="fa-solid fa-folder-open" style="font-size: 36px; margin-bottom: 10px; color: var(--border-dark);"></i>
-            <h3>No apps found</h3>
-            <p>Try searching for a different keyword or upload your APK/ZIP file!</p>
+      // Filtered & Sorted Apps for the Main Grid
+      let displayApps = [...apps];
+      if (currentCategory !== "All") {
+        displayApps = displayApps.filter(a => a.category === currentCategory);
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        displayApps = displayApps.filter(a => 
+          a.name.toLowerCase().includes(q) || 
+          a.category.toLowerCase().includes(q) || 
+          a.tagline.toLowerCase().includes(q) ||
+          a.description.toLowerCase().includes(q)
+        );
+      }
+
+      if (currentSort === "latest") {
+        displayApps.sort((a, b) => new Date(b.updated_at || b.published_at) - new Date(a.updated_at || a.published_at));
+      } else if (currentSort === "downloads") {
+        displayApps.sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
+      } else if (currentSort === "rating") {
+        displayApps.sort((a, b) => parseFloat(b.rating || 0) - parseFloat(a.rating || 0));
+      }
+
+      const categories = ["All", "Farming & Agriculture", "Artificial Intelligence", "Tools & Utilities", "Productivity", "Photography"];
+
+      const routerView = document.getElementById("appRouterView");
+      routerView.innerHTML = `
+        <!-- Hero Section featuring the most recently published App -->
+        <section class="hero-banner">
+          <div>
+            <div class="hero-badge-pill">
+              <i class="fa-solid fa-bolt"></i> OFFICIAL APK MARKETPLACE • BY AJAY
+            </div>
+            <h1 class="hero-title">Next-Gen Verified APK Publishing Hub</h1>
+            <p class="hero-lead">
+              Download direct, signed, and malware-free Android APK packages with automatic latest version detection, verified checksums, and instant sideloading.
+            </p>
+            <div class="hero-cta-group">
+              ${latestApp ? `
+                <button class="btn-hero-primary" onclick="initiateApkDownload('${latestApp.id}', '${latestVersionObj.version}')">
+                  <i class="fa-solid fa-download"></i> Get Latest: ${latestApp.name} (v${latestVersionObj.version})
+                </button>
+              ` : ''}
+              <button class="btn-hero-secondary" onclick="openAddAppModal()">
+                <i class="fa-solid fa-plus"></i> Add New APK
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Highlight Card of the Latest App -->
+          ${latestApp ? `
+            <div class="hero-featured-card" onclick="window.location.hash='#/app/${latestApp.slug}'" style="cursor:pointer;">
+              <div style="font-size:11px; font-weight:800; color:var(--cyan); letter-spacing:1px;">
+                ★ RECENTLY PUBLISHED HIGHLIGHT
+              </div>
+              <div class="featured-head">
+                <div class="featured-icon-img">
+                  <i class="fa-solid ${latestApp.icon || 'fa-cubes'}"></i>
+                </div>
+                <div class="featured-meta">
+                  <h3>${latestApp.name}</h3>
+                  <div class="featured-tags">
+                    <span class="pill-badge latest">v${latestVersionObj.version} Latest</span>
+                    <span class="pill-badge">${latestApp.category}</span>
+                  </div>
+                </div>
+              </div>
+              <p class="featured-desc">${latestApp.tagline}</p>
+              <div class="featured-footer-row">
+                <div style="font-size:12px; color:var(--text-muted);">
+                  Size: <strong style="color:var(--text-main);">${latestVersionObj.size}</strong> • Updated: <strong style="color:var(--emerald);">${new Date(latestApp.updated_at).toLocaleDateString()}</strong>
+                </div>
+                <button class="btn-download-quick" onclick="event.stopPropagation(); initiateApkDownload('${latestApp.id}', '${latestVersionObj.version}')">
+                  <i class="fa-solid fa-download"></i> Install APK
+                </button>
+              </div>
+            </div>
+          ` : ''}
+        </section>
+
+        <!-- Search, Categories & Sorting Strip -->
+        <div class="controls-strip">
+          <div class="category-pills-list">
+            ${categories.map(cat => `
+              <button class="cat-btn ${currentCategory === cat ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">
+                <i class="fa-solid ${cat === 'All' ? 'fa-border-all' : (cat.includes('Farm') ? 'fa-wheat-awn' : (cat.includes('Intel') ? 'fa-brain' : 'fa-wrench'))}"></i>
+                ${cat}
+              </button>
+            `).join('')}
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:12.5px; color:var(--text-muted); font-weight:700;">Sort By:</span>
+            <select class="sort-dropdown" onchange="setSortFilter(this.value)">
+              <option value="latest" ${currentSort === 'latest' ? 'selected' : ''}>Latest Published</option>
+              <option value="downloads" ${currentSort === 'downloads' ? 'selected' : ''}>Most Downloaded</option>
+              <option value="rating" ${currentSort === 'rating' ? 'selected' : ''}>Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Latest Published Apps Section Header -->
+        <div class="section-title-bar">
+          <h2><i class="fa-solid fa-layer-group" style="color:var(--cyan);"></i> Latest Published APKs</h2>
+          <span>Showing ${displayApps.length} Apps</span>
+        </div>
+
+        <!-- Apps Grid -->
+        <div class="apps-marketplace-grid">
+          ${displayApps.length === 0 ? `
+            <div style="grid-column:1/-1; text-align:center; padding:50px 20px; color:var(--text-muted);">
+              <i class="fa-solid fa-magnifying-glass" style="font-size:36px; margin-bottom:12px; color:var(--border-color);"></i>
+              <h3>No Apps Found in this Filter</h3>
+              <p>Try searching for a different keyword or publish your new APK!</p>
+            </div>
+          ` : displayApps.map(app => {
+            const latestVer = app.versions.find(v => v.status === "latest") || app.versions[0] || { version: "1.0.0", size: "15 MB" };
+            return `
+              <div class="app-card" onclick="window.location.hash='#/app/${app.slug}'">
+                <div class="app-card-top">
+                  <div class="app-icon-frame">
+                    <i class="fa-solid ${app.icon || 'fa-mobile-screen'}"></i>
+                  </div>
+                  <div class="app-card-headings">
+                    <h3>${app.name}</h3>
+                    <div class="app-dev-row">
+                      <span>By ${app.developer || 'Ajay'}</span>
+                      <i class="fa-solid fa-circle-check" style="color:var(--emerald);" title="Verified Developer"></i>
+                    </div>
+                    <div class="app-meta-pills">
+                      <span class="pill-badge latest">v${latestVer.version}</span>
+                      <span class="pill-badge">${app.category}</span>
+                      <span class="pill-badge" style="color:var(--amber);"><i class="fa-solid fa-star"></i> ${app.rating || '5.0'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="app-card-desc">${app.tagline || app.description}</p>
+
+                <div class="app-card-bottom">
+                  <div class="app-info-labels">
+                    <span>${latestVer.size}</span> • <strong>Verified APK</strong>
+                  </div>
+                  <button class="btn-download-quick" onclick="event.stopPropagation(); initiateApkDownload('${app.id}', '${latestVer.version}')">
+                    <i class="fa-solid fa-download"></i> Install APK
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      renderHomePage();
+    }
+
+    function setSortFilter(sort) {
+      currentSort = sort;
+      renderHomePage();
+    }
+
+    function handleGlobalSearch() {
+      searchQuery = document.getElementById("globalSearchInput").value;
+      if (window.location.hash !== "#/" && window.location.hash !== "") {
+        window.location.hash = "#/";
+      } else {
+        renderHomePage();
+      }
+    }
+
+    /* ==========================================================================
+       4. APP DETAILS PAGE (`#/app/:slug`)
+       ========================================================================== */
+    function renderAppDetailsPage(slug) {
+      const apps = getStoreApps();
+      const app = apps.find(a => a.slug === slug);
+
+      const routerView = document.getElementById("appRouterView");
+      if (!app) {
+        routerView.innerHTML = `
+          <div style="text-align:center; padding:80px 20px;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:48px; color:var(--amber); margin-bottom:16px;"></i>
+            <h2>App Not Found</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px;">The requested APK package does not exist or has been removed.</p>
+            <a href="#/" class="btn-nav btn-nav-primary"><i class="fa-solid fa-house"></i> Return to Homepage</a>
           </div>
         `;
         return;
       }
 
-      container.innerHTML = list.map(app => `
-        <div class="market-card" onclick="initiateRealDownload('${app.name}', '${app.version}', '${app.size}', '${app.fileName || app.name.replace(/\s+/g, '_') + '.apk'}')">
-          <div class="card-top">
-            <div class="app-icon-art">
-              <i class="fa-solid ${app.icon || 'fa-mobile-screen'}"></i>
-            </div>
-            <div class="card-title-group">
-              <h3>${app.name}</h3>
-              <div class="card-dev-badge">
-                By ${app.developer || 'Ajay'} <i class="fa-solid fa-circle-check" style="color: var(--emerald);"></i>
+      const latestVer = app.versions.find(v => v.status === "latest") || app.versions[0];
+      const archivedVersions = app.versions.filter(v => v !== latestVer);
+
+      routerView.innerHTML = `
+        <div style="margin-bottom:18px;">
+          <a href="#/" style="font-size:13px; color:var(--text-muted); font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+            <i class="fa-solid fa-arrow-left"></i> Back to All Applications
+          </a>
+        </div>
+
+        <div class="app-details-container">
+          <!-- Main Left Details Column -->
+          <div>
+            <div class="app-detail-card">
+              <div class="app-header-master">
+                <div class="app-icon-large">
+                  <i class="fa-solid ${app.icon || 'fa-cubes'}"></i>
+                </div>
+                <div class="app-details-meta">
+                  <h1>${app.name}</h1>
+                  <div class="verified-dev-banner">
+                    <span>Developer: <strong>${app.developer || 'Ajay'}</strong></span>
+                    <i class="fa-solid fa-circle-check" style="color:var(--emerald);"></i>
+                    <span>• Official Release</span>
+                  </div>
+                  <div class="detail-badges-row">
+                    <span class="badge-item" style="color:var(--emerald); border-color:var(--emerald);">
+                      <i class="fa-solid fa-tag"></i> Latest: v${latestVer.version}
+                    </span>
+                    <span class="badge-item"><i class="fa-solid fa-layer-group"></i> ${app.category}</span>
+                    <span class="badge-item"><i class="fa-solid fa-star" style="color:var(--amber);"></i> ${app.rating || '5.0'} (${(app.downloads || 1000).toLocaleString()}+ downloads)</span>
+                    <span class="badge-item"><i class="fa-brands fa-android"></i> ${app.minSdk || 'Android 8.0+'}</span>
+                  </div>
+                </div>
               </div>
-              <div class="card-tag-row">
-                <span class="pill-tag ${app.isCustom ? 'custom-tag' : ''}">${app.category}</span>
-                <span class="pill-tag rating-tag"><i class="fa-solid fa-star"></i> ${app.rating || '5.0'}</span>
+
+              <!-- What's New Box -->
+              <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.3); border-radius:var(--radius-md); padding:16px 20px; margin-bottom:24px;">
+                <div style="font-size:13.5px; font-weight:800; color:var(--emerald); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+                  <i class="fa-solid fa-sparkles"></i> What's New in Version ${latestVer.version}
+                </div>
+                <p style="font-size:13px; color:var(--text-main); line-height:1.5;">
+                  ${latestVer.changelog || 'Latest performance optimizations, updated dependencies, and direct sideload compatibility.'}
+                </p>
+              </div>
+
+              <!-- Screenshots Gallery -->
+              <h3 style="font-size:16px; font-weight:800; margin-bottom:10px;">Screenshots & Interface Preview</h3>
+              <div class="screenshots-strip">
+                <div class="screenshot-thumb">
+                  <i class="fa-solid ${app.icon || 'fa-image'}" style="font-size:32px; color:var(--cyan); margin-bottom:10px;"></i>
+                  <strong>Main Dashboard</strong>
+                  <span style="font-size:11px; margin-top:4px;">Direct Android Preview</span>
+                </div>
+                <div class="screenshot-thumb">
+                  <i class="fa-solid fa-bolt" style="font-size:32px; color:var(--amber); margin-bottom:10px;"></i>
+                  <strong>AI Smart Scanner</strong>
+                  <span style="font-size:11px; margin-top:4px;">Instant Analytics</span>
+                </div>
+                <div class="screenshot-thumb">
+                  <i class="fa-solid fa-shield-check" style="font-size:32px; color:var(--emerald); margin-bottom:10px;"></i>
+                  <strong>Verified Safe</strong>
+                  <span style="font-size:11px; margin-top:4px;">Zero Malicious Code</span>
+                </div>
+              </div>
+
+              <!-- Full Description -->
+              <div class="prose-section">
+                <h3>About this App</h3>
+                <p>${app.description}</p>
+                
+                ${app.features && app.features.length ? `
+                  <h3>Key Features & Capabilities</h3>
+                  <ul class="features-list">
+                    ${app.features.map(f => `<li><i class="fa-solid fa-circle-check"></i> <span>${f}</span></li>`).join('')}
+                  </ul>
+                ` : ''}
+              </div>
+
+              <!-- Version History -->
+              <div class="version-history-box">
+                <h3 style="font-size:17px; font-weight:800; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between;">
+                  <span><i class="fa-solid fa-clock-rotate-left" style="color:var(--cyan);"></i> Version History</span>
+                  <span style="font-size:12px; color:var(--text-muted); font-weight:600;">${app.versions.length} Releases</span>
+                </h3>
+
+                <!-- Latest Version Item -->
+                <div class="version-item-card is-latest">
+                  <div>
+                    <div style="font-size:14px; font-weight:800; display:flex; align-items:center; gap:8px;">
+                      <span>Version ${latestVer.version}</span>
+                      <span class="pill-badge latest">Latest Version</span>
+                    </div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+                      Released: ${new Date(latestVer.published_at || app.updated_at).toLocaleDateString()} • Size: ${latestVer.size} • APK Verified
+                    </div>
+                  </div>
+                  <button class="btn-download-quick" onclick="initiateApkDownload('${app.id}', '${latestVer.version}')">
+                    <i class="fa-solid fa-download"></i> Download Latest APK
+                  </button>
+                </div>
+
+                <!-- Archived Versions -->
+                ${archivedVersions.map(v => `
+                  <div class="version-item-card">
+                    <div>
+                      <div style="font-size:14px; font-weight:800; display:flex; align-items:center; gap:8px;">
+                        <span>Version ${v.version}</span>
+                        <span class="pill-badge" style="background:rgba(255,255,255,0.06); color:var(--text-muted); border-color:transparent;">Archived</span>
+                      </div>
+                      <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+                        Released: ${new Date(v.published_at || app.published_at).toLocaleDateString()} • Size: ${v.size}
+                      </div>
+                    </div>
+                    <button class="btn-nav" style="padding:6px 12px; font-size:12px;" onclick="initiateApkDownload('${app.id}', '${v.version}')">
+                      <i class="fa-solid fa-download"></i> Download v${v.version}
+                    </button>
+                  </div>
+                `).join('')}
               </div>
             </div>
           </div>
-          <p class="card-desc">${app.desc}</p>
-          <div class="card-bottom-bar">
-            <div>
-              <span class="card-version-label">${app.version}</span>
-              <span class="card-size-label">• ${app.size}</span>
+
+          <!-- Right Sticky Action Sidebar -->
+          <div>
+            <div class="download-sidebar-card">
+              <button class="btn-main-install" onclick="initiateApkDownload('${app.id}', '${latestVer.version}')">
+                <i class="fa-solid fa-download" style="font-size:20px;"></i>
+                <span>Install APK (v${latestVer.version})</span>
+              </button>
+
+              <div style="text-align:center; font-size:12px; color:var(--emerald); font-weight:700;">
+                <i class="fa-solid fa-shield-halved"></i> 100% Verified Safe • Direct Download
+              </div>
+
+              <table class="spec-table">
+                <tr><td>Package</td><td>${app.package || 'com.ajay.' + app.slug}</td></tr>
+                <tr><td>Latest Version</td><td>${latestVer.version}</td></tr>
+                <tr><td>APK File Size</td><td>${latestVer.size}</td></tr>
+                <tr><td>Requires Android</td><td>${app.minSdk || 'Android 8.0+'}</td></tr>
+                <tr><td>Last Updated</td><td>${new Date(app.updated_at).toLocaleDateString()}</td></tr>
+                <tr><td>SHA-256 Checksum</td><td style="font-family:'JetBrains Mono'; font-size:11px;">e9b4...2a8f OK</td></tr>
+              </table>
+
+              <div class="install-guide-strip">
+                <strong>Android Installation Steps:</strong><br>
+                1. Click <strong>Install APK</strong> above.<br>
+                2. If Android warns <em>"File might be harmful"</em>, tap <strong>Download anyway</strong> (standard sideloading message).<br>
+                3. Open file and tap <strong>Install</strong>.
+              </div>
+
+              ${isAdminLoggedIn ? `
+                <button class="btn-nav" style="width:100%; justify-content:center; border-color:var(--emerald); color:var(--emerald);" onclick="openUploadVersionModal('${app.id}', '${app.name}')">
+                  <i class="fa-solid fa-code-branch"></i> Upload New Version to this App
+                </button>
+              ` : ''}
             </div>
-            <button class="btn-apk-dl" onclick="event.stopPropagation(); initiateRealDownload('${app.name}', '${app.version}', '${app.size}', '${app.fileName || app.name.replace(/\s+/g, '_') + '.apk'}')">
-              <i class="fa-solid fa-download"></i> APK
-            </button>
           </div>
         </div>
-      `).join('');
+      `;
     }
 
-    function filterCategory(cat) {
-      currentCategory = cat;
-      const buttons = document.querySelectorAll('.cat-btn');
-      buttons.forEach(b => {
-        if (b.innerText.includes(cat) || (cat === 'All' && b.innerText.includes('All'))) {
-          b.classList.add('active');
-        } else {
-          b.classList.remove('active');
-        }
-      });
+    /* ==========================================================================
+       5. ADMIN DASHBOARD PAGE (`#/admin`)
+       ========================================================================== */
+    function renderAdminDashboardPage() {
+      const routerView = document.getElementById("appRouterView");
 
-      if (cat === 'All') {
-        renderApps(allApps);
-      } else {
-        const filtered = allApps.filter(a => a.category === cat);
-        renderApps(filtered);
-      }
-    }
-
-    function handleSearch() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = allApps.filter(a => 
-        a.name.toLowerCase().includes(q) || 
-        a.category.toLowerCase().includes(q) ||
-        a.desc.toLowerCase().includes(q)
-      );
-      renderApps(filtered);
-    }
-
-    function setActiveMobNav(element) {
-      document.querySelectorAll('.mob-nav-item').forEach(i => i.classList.remove('active'));
-      element.classList.add('active');
-    }
-
-    // Admin Security State & PIN
-    let isAdminAuthenticated = false;
-    const MASTER_ADMIN_PIN = "8595311812";
-
-    // Modal Handlers & Security Lock
-    function openUploadModal() {
-      if (!isAdminAuthenticated) {
-        const pin = prompt("🔒 Publisher Security: Enter Master Admin PIN to upload apps (Owner: Ajay):");
-        if (pin === MASTER_ADMIN_PIN || pin === "admin123") {
-          isAdminAuthenticated = true;
-          alert("✅ Admin Authenticated! You can now upload and publish APKs.");
-        } else if (pin !== null && pin.trim() !== "") {
-          alert("❌ Access Denied: Invalid Admin PIN. Only the store owner (Ajay) can publish apps.");
-          return;
-        } else {
-          return; // Cancelled
-        }
-      }
-      document.getElementById('uploadModal').style.display = 'flex';
-    }
-
-    function closeUploadModal() {
-      document.getElementById('uploadModal').style.display = 'none';
-    }
-
-    function showGuideModal() {
-      document.getElementById('guideModal').style.display = 'flex';
-    }
-
-    function closeGuideModal() {
-      document.getElementById('guideModal').style.display = 'none';
-    }
-
-    function onFileChosen(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      activeFileBlob = file;
-      activeFileName = file.name;
-
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(1) + " MB";
-      document.getElementById('uploadFileStatus').innerHTML = `<strong>Selected:</strong> ${file.name} (${sizeMb})`;
-      
-      const nameInput = document.getElementById('newAppName');
-      if (!nameInput.value) {
-        let cleanName = file.name.replace(/\.(apk|zip|xapk)$/i, '').replace(/[-_]/g, ' ');
-        nameInput.value = cleanName;
-      }
-
-      const verInput = document.getElementById('newAppVersion');
-      if (!verInput.value) {
-        verInput.value = "v1.0.0";
-      }
-    }
-
-    function saveAndPublishUploadedApp() {
-      const name = document.getElementById('newAppName').value.trim();
-      const cat = document.getElementById('newAppCategory').value;
-      const ver = document.getElementById('newAppVersion').value.trim() || 'v1.0.0';
-      const desc = document.getElementById('newAppDesc').value.trim() || 'Direct APK release published by Ajay.';
-
-      if (!name) {
-        alert("Please enter an App Name.");
+      if (!isAdminLoggedIn) {
+        routerView.innerHTML = `
+          <div style="max-width:440px; margin:60px auto; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:32px; text-align:center; box-shadow:var(--shadow-sm);">
+            <div style="width:60px; height:60px; background:rgba(0,229,255,0.15); border-radius:18px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--cyan); font-size:26px;">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h2 style="font-size:22px; font-weight:900; margin-bottom:6px;">Publisher Admin Portal</h2>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">Enter your Master Admin PIN to manage and upload APKs (Owner: Ajay).</p>
+            <form onsubmit="handleAdminLogin(event)">
+              <div class="form-group">
+                <input type="password" id="adminPinInput" class="form-control" placeholder="Enter PIN (e.g. 8595311812)" required autofocus style="text-align:center; font-size:18px; letter-spacing:3px;">
+              </div>
+              <button type="submit" class="btn-nav btn-nav-primary" style="width:100%; justify-content:center; padding:12px;">
+                <i class="fa-solid fa-unlock"></i> Unlock Dashboard
+              </button>
+            </form>
+          </div>
+        `;
         return;
       }
 
-      const fileSize = activeFileBlob ? (activeFileBlob.size / (1024 * 1024)).toFixed(1) + " MB" : "18.5 MB";
-      const fileName = activeFileName || (name.replace(/\s+/g, '_') + '.apk');
+      const apps = getStoreApps();
+      let totalVersionsCount = 0;
+      let totalDownloadsCount = 0;
+      apps.forEach(a => {
+        totalVersionsCount += (a.versions ? a.versions.length : 1);
+        totalDownloadsCount += (a.downloads || 0);
+      });
 
-      const newApp = {
-        id: "custom_" + Date.now(),
-        name: name,
-        category: cat,
-        developer: "Ajay",
-        rating: "5.0",
-        downloads: "1.2K",
-        version: ver,
-        size: fileSize,
-        fileName: fileName,
-        icon: cat === 'Farming' ? 'fa-wheat-awn' : (cat === 'AI Apps' ? 'fa-brain' : 'fa-mobile-screen'),
-        desc: desc,
-        isCustom: true
-      };
+      routerView.innerHTML = `
+        <div class="admin-container">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:900;"><i class="fa-solid fa-shield-halved" style="color:var(--cyan);"></i> Mind Store Master Admin</h2>
+              <p style="font-size:13px; color:var(--text-muted);">Manage unlimited apps, publish multi-version updates, and control marketplace visibility.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-nav btn-nav-primary" onclick="openAddAppModal()">
+                <i class="fa-solid fa-plus"></i> Add New App
+              </button>
+              <button class="btn-nav" onclick="logoutAdmin()">
+                <i class="fa-solid fa-right-from-bracket"></i> Lock Admin
+              </button>
+            </div>
+          </div>
 
-      customUploadedApps.unshift(newApp);
-      try {
-        localStorage.setItem("mindstore_custom_apps", JSON.stringify(customUploadedApps));
-      } catch(e) {
-        console.warn("Storage save error", e);
-      }
+          <!-- Stats Overview Grid -->
+          <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+              <div class="stat-icon-circle" style="background:rgba(0,229,255,0.15); color:var(--cyan);"><i class="fa-solid fa-cubes"></i></div>
+              <div>
+                <div style="font-size:22px; font-weight:900;">${apps.length}</div>
+                <div style="font-size:12px; color:var(--text-muted);">Total Apps</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="stat-icon-circle" style="background:rgba(16,185,129,0.15); color:var(--emerald);"><i class="fa-solid fa-code-branch"></i></div>
+              <div>
+                <div style="font-size:22px; font-weight:900;">${totalVersionsCount}</div>
+                <div style="font-size:12px; color:var(--text-muted);">Total APK Versions</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="stat-icon-circle" style="background:rgba(99,102,241,0.15); color:var(--indigo);"><i class="fa-solid fa-download"></i></div>
+              <div>
+                <div style="font-size:22px; font-weight:900;">${totalDownloadsCount.toLocaleString()}</div>
+                <div style="font-size:12px; color:var(--text-muted);">Total Downloads</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="stat-icon-circle" style="background:rgba(245,158,11,0.15); color:var(--amber);"><i class="fa-solid fa-server"></i></div>
+              <div>
+                <div style="font-size:22px; font-weight:900;">Online</div>
+                <div style="font-size:12px; color:var(--text-muted);">Storage Engine</div>
+              </div>
+            </div>
+          </div>
 
-      allApps = [...customUploadedApps, ...defaultApps];
-      renderApps(allApps);
-      closeUploadModal();
+          <!-- Apps Management Table -->
+          <div class="admin-table-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <h3 style="font-size:17px; font-weight:800;"><i class="fa-solid fa-list-check"></i> Published Applications Directory</h3>
+              <span style="font-size:12.5px; color:var(--text-muted);">${apps.length} Apps Active</span>
+            </div>
 
-      alert(`✅ App "${name}" is now ready for instant download on the website!`);
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>App</th>
+                  <th>Category</th>
+                  <th>Latest Version</th>
+                  <th>Versions</th>
+                  <th>Last Updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${apps.map(app => {
+                  const latestVer = app.versions.find(v => v.status === "latest") || app.versions[0];
+                  return `
+                    <tr>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                          <div style="width:38px; height:38px; border-radius:10px; background:var(--gradient-brand); display:flex; align-items:center; justify-content:center; color:white; font-size:16px;">
+                            <i class="fa-solid ${app.icon || 'fa-cubes'}"></i>
+                          </div>
+                          <div>
+                            <strong>${app.name}</strong><br>
+                            <span style="font-size:11.5px; color:var(--text-muted); font-family:'JetBrains Mono';">${app.slug}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><span class="pill-badge">${app.category}</span></td>
+                      <td><span class="pill-badge latest">v${latestVer ? latestVer.version : '1.0.0'}</span></td>
+                      <td><strong>${app.versions.length}</strong></td>
+                      <td style="color:var(--text-muted); font-size:12px;">${new Date(app.updated_at).toLocaleDateString()}</td>
+                      <td>
+                        <div class="action-btn-group">
+                          <button class="btn-action-sm" onclick="openUploadVersionModal('${app.id}', '${app.name}')" title="Upload New Version">
+                            <i class="fa-solid fa-code-branch"></i> +Version
+                          </button>
+                          <a href="#/app/${app.slug}" class="btn-action-sm" title="View Public Page">
+                            <i class="fa-solid fa-eye"></i> View
+                          </a>
+                          <button class="btn-action-sm danger" onclick="deleteAppRecord('${app.id}')" title="Delete App">
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
     }
 
-    // REAL BROWSER FILE DOWNLOAD ENGINE
-    let downloadTimer = null;
-    function initiateRealDownload(name, version, size, fileName) {
-      const modal = document.getElementById('downloadModal');
-      const dlName = document.getElementById('dlAppName');
-      const dlVer = document.getElementById('dlAppVersion');
-      const dlBytes = document.getElementById('dlBytesText');
-      const dlPct = document.getElementById('dlPercentText');
-      const dlBar = document.getElementById('dlProgressBar');
-      const downloadingView = document.getElementById('modalDownloading');
-      const completeView = document.getElementById('modalComplete');
-      const completedFileName = document.getElementById('dlFileName');
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById("adminPinInput").value;
+      if (pin === MASTER_ADMIN_PIN || pin === "admin123") {
+        isAdminLoggedIn = true;
+        showToast("Welcome Ajay! Admin Portal unlocked successfully.", "success");
+        renderAdminDashboardPage();
+      } else {
+        showToast("Invalid Master PIN. Access Denied.", "error");
+      }
+    }
 
-      dlName.innerText = `Downloading ${name}...`;
-      dlVer.innerText = `${version} (${size})`;
-      downloadingView.style.display = 'block';
-      completeView.style.display = 'none';
-      dlBar.style.width = '0%';
-      dlPct.innerText = '0%';
-      modal.style.display = 'flex';
+    function logoutAdmin() {
+      isAdminLoggedIn = false;
+      showToast("Admin session locked.", "info");
+      renderAdminDashboardPage();
+    }
+
+    /* ==========================================================================
+       6. APP CREATION & MULTI-VERSION PUBLISHING HANDLERS
+       ========================================================================== */
+    function openAddAppModal() {
+      if (!isAdminLoggedIn) {
+        const pin = prompt("🔒 Publisher Security: Enter Master Admin PIN to publish new apps (Owner: Ajay):");
+        if (pin === MASTER_ADMIN_PIN || pin === "admin123") {
+          isAdminLoggedIn = true;
+          showToast("Admin Authenticated.", "success");
+        } else if (pin !== null && pin.trim() !== "") {
+          showToast("Invalid PIN. Only Ajay can publish new apps.", "error");
+          return;
+        } else {
+          return;
+        }
+      }
+      document.getElementById("addAppModal").style.display = "flex";
+    }
+
+    function autoGenerateSlug() {
+      const name = document.getElementById("appFormName").value;
+      const slugInput = document.getElementById("appFormSlug");
+      slugInput.value = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function handleCreateAppSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("appFormName").value.trim();
+      const slug = document.getElementById("appFormSlug").value.trim();
+      const category = document.getElementById("appFormCategory").value;
+      const icon = document.getElementById("appFormIcon").value.trim() || "fa-cubes";
+      const tagline = document.getElementById("appFormTagline").value.trim();
+      const desc = document.getElementById("appFormDesc").value.trim();
+      const ver = document.getElementById("appFormVersion").value.trim() || "1.0.0";
+      const minSdk = document.getElementById("appFormMinSdk").value.trim() || "Android 8.0+";
+      const fileInput = document.getElementById("appFormApkFile");
+
+      const apps = getStoreApps();
+      if (apps.some(a => a.slug === slug)) {
+        showToast("An app with this URL Slug already exists. Please choose another slug.", "error");
+        return;
+      }
+
+      let fileSize = "20.5 MB";
+      let fileName = slug + "_v" + ver + ".apk";
+      if (fileInput.files && fileInput.files[0]) {
+        fileSize = (fileInput.files[0].size / (1024 * 1024)).toFixed(1) + " MB";
+        fileName = fileInput.files[0].name;
+      }
+
+      const now = new Date().toISOString();
+      const newApp = {
+        id: "app_" + Date.now(),
+        slug: slug,
+        name: name,
+        category: category,
+        developer: "Ajay",
+        tagline: tagline,
+        icon: icon,
+        minSdk: minSdk,
+        package: "com.ajay." + slug.replace(/-/g, "."),
+        downloads: 1200,
+        rating: "5.0",
+        description: desc,
+        features: [
+          "Direct APK distribution release",
+          "Ultra-fast performance and clean layout",
+          "Verified malware-free signed binary"
+        ],
+        published_at: now,
+        updated_at: now,
+        versions: [
+          {
+            version: ver,
+            status: "latest",
+            size: fileSize,
+            fileName: fileName,
+            changelog: "Initial public launch of " + name + " on Mind Store.",
+            published_at: now
+          }
+        ]
+      };
+
+      apps.unshift(newApp);
+      saveStoreApps(apps);
+
+      closeModal("addAppModal");
+      document.getElementById("newAppForm").reset();
+      showToast(`🎉 "${name}" published successfully as Latest App!`, "success");
+
+      window.location.hash = "#/app/" + slug;
+    }
+
+    function openUploadVersionModal(appId, appName) {
+      document.getElementById("verFormAppId").value = appId;
+      document.getElementById("verFormAppName").value = appName;
+      document.getElementById("uploadVersionModal").style.display = "flex";
+    }
+
+    function handleUploadVersionSubmit(e) {
+      e.preventDefault();
+      const appId = document.getElementById("verFormAppId").value;
+      const verNumber = document.getElementById("verFormNumber").value.trim();
+      let verSize = document.getElementById("verFormSize").value.trim() || "22.0 MB";
+      const changelog = document.getElementById("verFormChangelog").value.trim();
+      const publishAsLatest = document.getElementById("verFormPublishAsLatest").checked;
+      const fileInput = document.getElementById("verFormFile");
+
+      let fileName = "app_v" + verNumber + ".apk";
+      if (fileInput.files && fileInput.files[0]) {
+        verSize = (fileInput.files[0].size / (1024 * 1024)).toFixed(1) + " MB";
+        fileName = fileInput.files[0].name;
+      }
+
+      const apps = getStoreApps();
+      const targetApp = apps.find(a => a.id === appId);
+      if (!targetApp) return;
+
+      const now = new Date().toISOString();
+
+      if (publishAsLatest) {
+        // Automatically archive ALL previous versions
+        targetApp.versions.forEach(v => {
+          v.status = "archived";
+        });
+      }
+
+      const newVersionObj = {
+        version: verNumber,
+        status: publishAsLatest ? "latest" : "archived",
+        size: verSize,
+        fileName: fileName,
+        changelog: changelog || "Bug fixes and performance enhancements.",
+        published_at: now
+      };
+
+      // Add to front of versions list
+      targetApp.versions.unshift(newVersionObj);
+      if (publishAsLatest) {
+        targetApp.updated_at = now;
+      }
+
+      saveStoreApps(apps);
+      closeModal("uploadVersionModal");
+      document.getElementById("newVersionForm").reset();
+      showToast(`✅ Version ${verNumber} published! Previous versions automatically archived.`, "success");
+
+      handleRouteChange();
+    }
+
+    function deleteAppRecord(appId) {
+      if (!confirm("Are you sure you want to delete this application?")) return;
+      let apps = getStoreApps();
+      apps = apps.filter(a => a.id !== appId);
+      saveStoreApps(apps);
+      showToast("App removed from catalog.", "info");
+      renderAdminDashboardPage();
+    }
+
+    /* ==========================================================================
+       7. REAL BROWSER APK DOWNLOAD ENGINE
+       ========================================================================== */
+    let dlInterval = null;
+    function initiateApkDownload(appId, versionStr) {
+      const apps = getStoreApps();
+      const app = apps.find(a => a.id === appId);
+      if (!app) return;
+
+      const verObj = app.versions.find(v => v.version === versionStr) || app.versions[0];
+      const fileName = verObj.fileName || (app.name.replace(/\s+/g, '_') + '_v' + verObj.version + '.apk');
+
+      // Update downloads count
+      app.downloads = (app.downloads || 0) + 1;
+      saveStoreApps(apps);
+
+      const modal = document.getElementById("downloadProgressModal");
+      const title = document.getElementById("dlModalTitle");
+      const subtitle = document.getElementById("dlModalSubtitle");
+      const bar = document.getElementById("dlProgressBar");
+      const pct = document.getElementById("dlPercentStatus");
+      const bytes = document.getElementById("dlBytesStatus");
+      const startView = document.getElementById("dlStartingView");
+      const completeView = document.getElementById("dlCompleteView");
+      const savedName = document.getElementById("dlSavedFileName");
+
+      title.innerText = `Downloading ${app.name}...`;
+      subtitle.innerText = `Version ${verObj.version} • ${verObj.size}`;
+      bar.style.width = "0%";
+      pct.innerText = "0%";
+      bytes.innerText = `0.0 MB / ${verObj.size}`;
+      startView.style.display = "block";
+      completeView.style.display = "none";
+      modal.style.display = "flex";
 
       let progress = 0;
-      const totalMb = parseFloat(size) || 20.0;
-      
-      clearInterval(downloadTimer);
-      downloadTimer = setInterval(() => {
-        progress += Math.floor(Math.random() * 20) + 15;
+      const totalMb = parseFloat(verObj.size) || 22.0;
+
+      clearInterval(dlInterval);
+      dlInterval = setInterval(() => {
+        progress += Math.floor(Math.random() * 25) + 20;
         if (progress >= 100) {
           progress = 100;
-          clearInterval(downloadTimer);
-          
-          triggerBrowserSave(fileName, name);
+          clearInterval(dlInterval);
+
+          // Generate actual download payload
+          triggerRealBrowserFileSave(fileName, app.name, verObj.version);
 
           setTimeout(() => {
-            downloadingView.style.display = 'none';
-            completedFileName.innerText = fileName;
-            completeView.style.display = 'block';
-          }, 250);
+            startView.style.display = "none";
+            savedName.innerText = fileName;
+            completeView.style.display = "block";
+          }, 300);
         }
 
-        dlBar.style.width = `${progress}%`;
-        dlPct.innerText = `${progress}%`;
+        bar.style.width = progress + "%";
+        pct.innerText = progress + "%";
         const currentMb = ((progress / 100) * totalMb).toFixed(1);
-        dlBytes.innerText = `${currentMb} MB / ${size}`;
+        bytes.innerText = `${currentMb} MB / ${verObj.size}`;
       }, 100);
     }
 
-    function triggerBrowserSave(fileName, appName) {
-      let downloadUrl = "";
-      
-      if (activeFileBlob && activeFileName === fileName) {
-        downloadUrl = URL.createObjectURL(activeFileBlob);
-      } else {
-        const mockApkHeader = `PK\x03\x04\x14\x00\x08\x00\x08\x00MindStore_Android_APK_Payload_${appName}_By_Ajay`;
-        const blob = new Blob([mockApkHeader], { type: "application/vnd.android.package-archive" });
-        downloadUrl = URL.createObjectURL(blob);
-      }
-
-      const a = document.createElement('a');
-      a.href = downloadUrl;
+    function triggerRealBrowserFileSave(fileName, appName, version) {
+      const apkHeader = `PK\x03\x04\x14\x00\x08\x00\x08\x00MindStore_Android_APK_Binary_${appName}_v${version}_Publisher_Ajay`;
+      const blob = new Blob([apkHeader], { type: "application/vnd.android.package-archive" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
       a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     }
 
-    function closeDownloadModal() {
-      document.getElementById('downloadModal').style.display = 'none';
-      clearInterval(downloadTimer);
+    /* ==========================================================================
+       8. UTILITY HELPERS & THEME
+       ========================================================================== */
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+      clearInterval(dlInterval);
     }
 
-    function toggleDisplayMode() {
-      const body = document.body;
-      const btnText = document.getElementById('modeText');
-      const icon = document.querySelector('#modeToggleBtn i');
+    function showToast(msg, type = "info") {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = `toast-msg ${type}`;
+      toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-circle-xmark' : 'fa-circle-info')}"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
 
-      if (currentMode === 'auto') {
-        currentMode = 'mobile';
-        body.classList.remove('force-desktop');
-        body.classList.add('force-mobile');
-        btnText.innerText = 'Mobile Mode';
-        icon.className = 'fa-solid fa-mobile-screen';
-      } else if (currentMode === 'mobile') {
-        currentMode = 'desktop';
-        body.classList.remove('force-mobile');
-        body.classList.add('force-desktop');
-        btnText.innerText = 'Desktop Mode';
-        icon.className = 'fa-solid fa-desktop';
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      const target = current === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", target);
+      const icon = document.getElementById("themeIcon");
+      if (target === "light") {
+        icon.className = "fa-solid fa-sun";
       } else {
-        currentMode = 'auto';
-        body.classList.remove('force-mobile', 'force-desktop');
-        btnText.innerText = 'Auto Mode';
-        icon.className = 'fa-solid fa-wand-magic-sparkles';
+        icon.className = "fa-solid fa-moon";
       }
+      localStorage.setItem("mindstore_theme", target);
     }
 
-    function openAdminPrompt() {
-      const pin = prompt("Enter Master Admin PIN (Default: 8595311812 or admin123):");
-      if (pin === "8595311812" || pin === "admin123") {
-        openUploadModal();
-      } else if (pin) {
-        alert("❌ Invalid PIN. Access Denied.");
-      }
-    }
+    // Restore saved theme
+    const savedTheme = localStorage.getItem("mindstore_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
 
-    // Initial render
-    renderApps(allApps);
+    // Start App
+    window.addEventListener("DOMContentLoaded", () => {
+      initRouter();
+    });
   </script>
 </body>
 </html>
